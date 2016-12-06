@@ -5,15 +5,22 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.computing.cloud.domain.Authentication;
 import com.computing.cloud.exception.AuthenticationException;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class UserServiceTest {
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-	private UserService service = new UserServiceImpl();
+	@Autowired
+	private UserService service;
 	
 	protected void expect(Class<? extends Exception> exceptionClass, String message) {
 		thrown.expect(exceptionClass);
