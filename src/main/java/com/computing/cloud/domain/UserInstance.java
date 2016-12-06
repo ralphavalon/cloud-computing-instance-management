@@ -3,17 +3,21 @@ package com.computing.cloud.domain;
 import java.util.UUID;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import com.computing.cloud.enums.InstanceStatus;
 
+@Getter
 public class UserInstance {
-	
-	@Getter
+
+	@Setter
+	private Long id;
+	private User user;
 	private String instanceUniqueName;
-	@Getter
 	private InstanceStatus status;
 	
-	public UserInstance(InstanceStatus status) {
+	public UserInstance(User user, InstanceStatus status) {
+		this.user = user;
 		this.instanceUniqueName = UUID.randomUUID().toString();
 		this.status = status;
 	}

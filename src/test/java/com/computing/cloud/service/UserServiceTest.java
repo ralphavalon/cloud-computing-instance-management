@@ -29,20 +29,20 @@ public class UserServiceTest {
 	
 	@Test
 	public void shouldReturnTokenWhenUsernameAndPasswordAreRight() throws AuthenticationException {
-		final Authentication authentication = service.login("username", "password");
+		final Authentication authentication = service.login("userOne", "passOne");
 		assertEquals("token", authentication.getToken());
 	}
 	
 	@Test
 	public void shouldThrowExceptionWhenUsernameIsNotRight() throws AuthenticationException {
 		expect(AuthenticationException.class, "Username and/or password are incorrect");
-		service.login("wrong_username", "password");
+		service.login("wrong_username", "passOne");
 	}
 	
 	@Test
 	public void shouldThrowExceptionWhenPasswordIsNotRight() throws AuthenticationException {
 		expect(AuthenticationException.class, "Username and/or password are incorrect");
-		service.login("username", "wrong_password");
+		service.login("userOne", "wrong_password");
 	}
 	
 	@Test
