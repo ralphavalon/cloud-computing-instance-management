@@ -1,13 +1,12 @@
 package com.computing.cloud.domain;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Getter @Builder
 public class User {
 
 	private String username;
 	private String password;
 	
-
 }

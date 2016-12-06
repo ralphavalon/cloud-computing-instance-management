@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
+import com.computing.cloud.domain.User.UserBuilder;
 import com.computing.cloud.enums.InstanceStatus;
 
 @RunWith(SpringRunner.class)
@@ -24,13 +25,18 @@ public class UserInstanceServiceTest {
 	
 	@Autowired
 	private UserInstanceService service;
-	private static User userOne = new User();
-	private static User userTwo = new User();
+	private static User userOne;
+	private static User userTwo;
 	
 	@BeforeClass
 	public static void setUp() {
-		userOne.setUsername("userOne");
-		userTwo.setUsername("userTwo");
+		UserBuilder builder = User.builder();
+		builder.username("userOne");
+		userOne = builder.build();
+		
+		builder = User.builder();
+		builder.username("userTwo");
+		userTwo = builder.build();
 	}
 	
 	@Test
@@ -71,9 +77,12 @@ public class UserInstanceServiceTest {
 	
 	@Test
 	public void shouldNotReturnUserInstancesFromAnotherUser() {
-		service.createInstances(userOne, 5, InstanceStatus.OFF);
 		service.createInstances(userTwo, 10, InstanceStatus.OFF);
 		List<UserInstance> userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
+		assertEquals(0, userInstances.size());
+		
+		service.createInstances(userOne, 5, InstanceStatus.OFF);
+		userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
 		assertEquals(5, userInstances.size());
 		
 		for (UserInstance userInstance : userInstances) {

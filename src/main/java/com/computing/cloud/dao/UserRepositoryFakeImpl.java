@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.computing.cloud.domain.User;
+import com.computing.cloud.domain.User.UserBuilder;
 
 @Repository
 public class UserRepositoryFakeImpl implements UserRepository {
@@ -13,13 +14,17 @@ public class UserRepositoryFakeImpl implements UserRepository {
 	List<User> users = new ArrayList<User>();
 	
 	public UserRepositoryFakeImpl() {
-		final User userOne = new User();
-		userOne.setUsername("userOne");
-		userOne.setPassword("passOne");
+		UserBuilder builder = User.builder();
+		builder
+			.username("userOne")
+			.password("passOne");
+		final User userOne = builder.build();
 		
-		final User userTwo = new User();
-		userTwo.setUsername("userTwo");
-		userTwo.setPassword("passTwo");
+		builder = User.builder();
+		builder
+			.username("userTwo")
+			.password("passTwo");
+		final User userTwo = builder.build();
 		
 		users.add(userOne);
 		users.add(userTwo);
