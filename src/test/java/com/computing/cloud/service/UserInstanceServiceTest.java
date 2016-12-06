@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.computing.cloud.domain.UserInstance;
+import com.computing.cloud.enums.InstanceStatus;
 
 public class UserInstanceServiceTest {
 	
@@ -14,8 +15,12 @@ public class UserInstanceServiceTest {
 	
 	@Test
 	public void shouldCreateFiveUserInstances() {
-		final List<UserInstance> userInstances = service.createInstances(5);
+		final List<UserInstance> userInstances = service.createInstances(5, InstanceStatus.OFF);
 		assertEquals(5, userInstances.size());
+		
+		for (UserInstance userInstance : userInstances) {
+			assertEquals(InstanceStatus.OFF, userInstance.getStatus());
+		}
 	}
 
 }
