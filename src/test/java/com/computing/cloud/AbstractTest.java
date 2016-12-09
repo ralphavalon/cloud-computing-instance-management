@@ -38,6 +38,9 @@ public abstract class AbstractTest {
 	
 	@BeforeClass
 	public static void setUp() {
+		hdd.setId(1L);
+		ssd.setId(2L);
+		
 		UserBuilder builder = User.builder();
 		builder.username("userOne");
 		userOne = builder.build();

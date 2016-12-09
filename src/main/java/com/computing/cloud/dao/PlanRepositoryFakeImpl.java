@@ -21,6 +21,9 @@ public class PlanRepositoryFakeImpl implements PlanRepository {
 	private StorageType ssd = new StorageType("SSD");
 	
 	public PlanRepositoryFakeImpl() {
+		hdd.setId(1L);
+		ssd.setId(2L);
+		
 		PlanBuilder builder = Plan.builder();
 		builder
 			.id(1L)
