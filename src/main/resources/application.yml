@@ -1,0 +1,42 @@
+server:
+  context-path: /herotrip
+  port: 8080
+
+---
+
+spring:
+  profiles: dev
+  database:
+    driverClassName: org.h2.Driver
+  datasource:
+    url: jdbc:h2:~/cloud_computing;MV_STORE=FALSE;MVCC=FALSE
+    username: sa
+    password: 
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+    hibernate: 
+      ddl-auto: create
+    show-sql: true
+
+---
+ 
+spring: 
+  profiles: test
+  database:
+    driverClassName: org.h2.Driver
+  datasource:
+    url: jdbc:h2:~/cloud_computing_test;MV_STORE=FALSE;MVCC=FALSE
+    username: sa
+    password: 
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  
+---
+
+spring:
+  profiles:
+    active: dev
