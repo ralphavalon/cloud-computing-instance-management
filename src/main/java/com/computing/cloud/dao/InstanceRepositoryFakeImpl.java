@@ -7,12 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import com.computing.cloud.domain.Instance;
 import com.computing.cloud.domain.Instance.InstanceBuilder;
-import com.computing.cloud.enums.StorageType;
+import com.computing.cloud.domain.StorageType;
 
 @Repository
 public class InstanceRepositoryFakeImpl implements InstanceRepository {
 	
 	List<Instance> instances = new ArrayList<Instance>();
+	private StorageType hdd = new StorageType("HDD");
+	private StorageType ssd = new StorageType("SSD");
 	
 	public InstanceRepositoryFakeImpl() {
 		InstanceBuilder builder = Instance.builder();
@@ -22,8 +24,8 @@ public class InstanceRepositoryFakeImpl implements InstanceRepository {
 			.cpu(1)
 			.memory(2)
 			.storage(40)
-			.storageType(StorageType.HDD);
-		final Instance instanceOne = builder.build();
+			.storageType(hdd);
+		final Instance small = builder.build();
 		
 		builder = Instance.builder();
 		builder
@@ -32,8 +34,8 @@ public class InstanceRepositoryFakeImpl implements InstanceRepository {
 			.cpu(2)
 			.memory(4)
 			.storage(100)
-			.storageType(StorageType.HDD);
-		final Instance instanceTwo = builder.build();
+			.storageType(hdd);
+		final Instance medium = builder.build();
 		
 		builder = Instance.builder();
 		builder
@@ -42,12 +44,12 @@ public class InstanceRepositoryFakeImpl implements InstanceRepository {
 			.cpu(2)
 			.memory(8)
 			.storage(250)
-			.storageType(StorageType.SSD);
-		final Instance instanceThree = builder.build();
+			.storageType(ssd);
+		final Instance large = builder.build();
 		
-		instances.add(instanceOne);
-		instances.add(instanceTwo);
-		instances.add(instanceThree);
+		instances.add(small);
+		instances.add(medium);
+		instances.add(large);
 	}
 	
 	@Override

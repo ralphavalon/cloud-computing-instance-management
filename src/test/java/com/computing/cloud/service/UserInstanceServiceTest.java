@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,59 +12,19 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.computing.cloud.AbstractTest;
 import com.computing.cloud.domain.Instance;
 import com.computing.cloud.domain.OperatingSystem;
-import com.computing.cloud.domain.User;
-import com.computing.cloud.domain.Instance.InstanceBuilder;
-import com.computing.cloud.domain.User.UserBuilder;
 import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.enums.InstanceStatus;
-import com.computing.cloud.enums.StorageType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode=ClassMode.BEFORE_EACH_TEST_METHOD)
-public class UserInstanceServiceTest {
+public class UserInstanceServiceTest extends AbstractTest {
 	
 	@Autowired
 	private UserInstanceService service;
-	private static User userOne;
-	private static User userTwo;
-	private static Instance small;
-	private static Instance medium;
-	private static OperatingSystem windowsServer2003 = new OperatingSystem("Windows Server 2003");
-	private static OperatingSystem ubuntu12_04 = new OperatingSystem("Ubuntu 12.04");
-	
-	@BeforeClass
-	public static void setUp() {
-		UserBuilder builder = User.builder();
-		builder.username("userOne");
-		userOne = builder.build();
-		
-		builder = User.builder();
-		builder.username("userTwo");
-		userTwo = builder.build();
-		
-		InstanceBuilder instanceBuilder = Instance.builder();
-		instanceBuilder
-			.id(1L)
-			.name("small")
-			.cpu(1)
-			.memory(2)
-			.storage(40)
-			.storageType(StorageType.HDD);
-		small = instanceBuilder.build();
-		
-		instanceBuilder = Instance.builder();
-		instanceBuilder
-			.id(2L)
-			.name("medium")
-			.cpu(2)
-			.memory(4)
-			.storage(100)
-			.storageType(StorageType.HDD);
-		medium = instanceBuilder.build();
-	}
 	
 	@Test
 	public void shouldNotCreateUserInstancesWithNegativeQuantityOrZero() {
