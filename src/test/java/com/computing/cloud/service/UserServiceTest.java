@@ -1,32 +1,26 @@
 package com.computing.cloud.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.computing.cloud.AbstractTest;
 import com.computing.cloud.domain.Authentication;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.exception.AuthenticationException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceTest extends AbstractTest {
 	
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 	@Autowired
 	private UserService service;
-	
-	protected void expect(Class<? extends Exception> exceptionClass, String message) {
-		thrown.expect(exceptionClass);
-        thrown.expectMessage(message);
-	}
 	
 	@Test
 	public void shouldValidateUserAndSaveValidUser() throws AuthenticationException {

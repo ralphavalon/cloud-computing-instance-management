@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.computing.cloud.dao.UserInstanceRepository;
+import com.computing.cloud.domain.Instance;
 import com.computing.cloud.domain.OperatingSystem;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
@@ -19,12 +20,17 @@ public class UserInstanceServiceImpl implements UserInstanceService {
 	private UserInstanceRepository userInstanceRepository;
 
 	@Override
-	public List<UserInstance> createInstances(User user, int quantity, InstanceStatus status, OperatingSystem operatingSystem) {
+	public List<UserInstance> createInstances(UserInstance userInstance, int quantity) {
+		User user = userInstance.getUser();
+		InstanceStatus status = userInstance.getStatus();
+		Instance instance = userInstance.getInstance();
+		OperatingSystem operatingSystem = userInstance.getOperatingSystem();
+		
 		List<UserInstance> instances = new ArrayList<UserInstance>();
 		for (int i = 0; i < quantity; i++) {
-			final UserInstance userInstance = new UserInstance(user, status, operatingSystem);
-			userInstanceRepository.save(userInstance);
-			instances.add(userInstance);
+			UserInstance newUserInstance = new UserInstance(user, status, instance, operatingSystem);
+			userInstanceRepository.save(newUserInstance);
+			instances.add(newUserInstance);
 		}
 		return instances;
 	}
