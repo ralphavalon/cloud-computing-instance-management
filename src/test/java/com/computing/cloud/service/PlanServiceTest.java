@@ -1,9 +1,6 @@
 package com.computing.cloud.service;
 
-import static org.junit.Assert.assertTrue;
-
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,13 +22,13 @@ public class PlanServiceTest extends AbstractTest {
 	public void shouldCalculatePricePerHour() throws Exception {
 		Plan plan = service.findById(1L);
 		BigDecimal pricePerHour = service.getPricePerHour(plan, small);
-		assertEquals(new BigDecimal(0.024), pricePerHour);
+		assertEqualsBigDecimal(new BigDecimal(0.024), pricePerHour);
 		
 		pricePerHour = service.getPricePerHour(plan, medium);
-		assertEquals(new BigDecimal(0.052), pricePerHour);
+		assertEqualsBigDecimal(new BigDecimal(0.052), pricePerHour);
 		
 		pricePerHour = service.getPricePerHour(plan, large);
-		assertEquals(new BigDecimal(0.206), pricePerHour);
+		assertEqualsBigDecimal(new BigDecimal(0.206), pricePerHour);
 	}
 
 }

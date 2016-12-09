@@ -77,7 +77,7 @@ public abstract class AbstractTest {
 		large = instanceBuilder.build();
 	}
 	
-	protected void assertEquals(BigDecimal expectedValue, BigDecimal actualValue) {
+	protected void assertEqualsBigDecimal(BigDecimal expectedValue, BigDecimal actualValue) {
 		BigDecimal expected = expectedValue.setScale(6, RoundingMode.HALF_UP);
 		BigDecimal actual = actualValue.setScale(6, RoundingMode.HALF_UP);
 		String message = "Expected: " + expected + " Actual: " + actual;
