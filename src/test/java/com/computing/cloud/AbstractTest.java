@@ -1,5 +1,10 @@
 package com.computing.cloud;
 
+import static org.junit.Assert.assertTrue;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
@@ -70,6 +75,13 @@ public abstract class AbstractTest {
 			.storage(250)
 			.storageType(ssd);
 		large = instanceBuilder.build();
+	}
+	
+	protected void assertEquals(BigDecimal expectedValue, BigDecimal actualValue) {
+		BigDecimal expected = expectedValue.setScale(6, RoundingMode.HALF_UP);
+		BigDecimal actual = actualValue.setScale(6, RoundingMode.HALF_UP);
+		String message = "Expected: " + expected + " Actual: " + actual;
+		assertTrue(message, expected.equals(actual));
 	}
 
 }

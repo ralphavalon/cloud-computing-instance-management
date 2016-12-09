@@ -34,11 +34,4 @@ public class PlanServiceTest extends AbstractTest {
 		assertEquals(new BigDecimal(0.206), pricePerHour);
 	}
 
-	private void assertEquals(BigDecimal expectedValue, BigDecimal actualValue) {
-		BigDecimal expected = expectedValue.setScale(6, RoundingMode.HALF_UP);
-		BigDecimal actual = actualValue.setScale(6, RoundingMode.HALF_UP);
-		String message = "Expected: " + expected + " Actual: " + actual;
-		assertTrue(message, expected.equals(actual));
-	}
-	
 }
