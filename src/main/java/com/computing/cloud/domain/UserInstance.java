@@ -2,12 +2,14 @@ package com.computing.cloud.domain;
 
 import java.util.UUID;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import com.computing.cloud.enums.InstanceStatus;
 
 @Getter
+@EqualsAndHashCode(exclude={"status", "user", "operatingSystem", "instance"})
 public class UserInstance {
 
 	@Setter
