@@ -12,22 +12,38 @@ import com.computing.cloud.domain.User.UserBuilder;
 public class UserRepositoryFakeImpl implements UserRepository {
 	
 	List<User> users = new ArrayList<User>();
+	private static long i = 0L;
 	
 	public UserRepositoryFakeImpl() {
 		UserBuilder builder = User.builder();
 		builder
+			.id(++i)
 			.username("userOne")
 			.password("passOne");
 		final User userOne = builder.build();
 		
 		builder = User.builder();
 		builder
+			.id(++i)
 			.username("userTwo")
 			.password("passTwo");
 		final User userTwo = builder.build();
 		
 		users.add(userOne);
 		users.add(userTwo);
+	}
+	
+	@Override
+	public User save(User user) {
+		user = User.builder()
+			.id(++i)
+			.username(user.getUsername())
+			.password(user.getPassword())
+			.email(user.getEmail())
+			.creditCard(user.getCreditCard())
+			.build();
+		users.add(user);
+		return user;
 	}
 	
 	public User findByUsernameAndPassword(String username, String password) {

@@ -1,6 +1,6 @@
 package com.computing.cloud.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.computing.cloud.domain.Authentication;
+import com.computing.cloud.domain.User;
 import com.computing.cloud.exception.AuthenticationException;
 
 @RunWith(SpringRunner.class)
@@ -25,6 +26,19 @@ public class UserServiceTest {
 	protected void expect(Class<? extends Exception> exceptionClass, String message) {
 		thrown.expect(exceptionClass);
         thrown.expectMessage(message);
+	}
+	
+	@Test
+	public void shouldValidateUserAndSaveValidUser() throws AuthenticationException {
+		User user = User.builder()
+					.username("username")
+					.password("password")
+					.creditCard("creditCard")
+					.email("email")
+					.build();
+		user = service.saveUser(user);
+		assertNotNull(user.getId());
+		assertTrue(user.getId() > 0);
 	}
 	
 	@Test
