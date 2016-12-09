@@ -13,6 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.computing.cloud.domain.OperationalSystem;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.domain.User.UserBuilder;
@@ -27,6 +28,8 @@ public class UserInstanceServiceTest {
 	private UserInstanceService service;
 	private static User userOne;
 	private static User userTwo;
+	private static OperationalSystem windowsServer2003 = new OperationalSystem("Windows Server 2003");
+	private static OperationalSystem ubuntu12_04 = new OperationalSystem("Ubuntu 12.04");
 	
 	@BeforeClass
 	public static void setUp() {
@@ -41,16 +44,16 @@ public class UserInstanceServiceTest {
 	
 	@Test
 	public void shouldNotCreateUserInstancesWithNegativeQuantityOrZero() {
-		List<UserInstance> userInstances = service.createInstances(userOne, -1, InstanceStatus.OFF);
+		List<UserInstance> userInstances = service.createInstances(userOne, -1, InstanceStatus.OFF, windowsServer2003);
 		assertEquals(0, userInstances.size());
 		
-		userInstances = service.createInstances(userOne, 0, InstanceStatus.OFF);
+		userInstances = service.createInstances(userOne, 0, InstanceStatus.OFF, windowsServer2003);
 		assertEquals(0, userInstances.size());
 	}
 	
 	@Test
 	public void shouldCreateUserInstancesWithStatusOff() {
-		final List<UserInstance> userInstances = service.createInstances(userOne, 5, InstanceStatus.OFF);
+		final List<UserInstance> userInstances = service.createInstances(userOne, 5, InstanceStatus.OFF, ubuntu12_04);
 		assertEquals(5, userInstances.size());
 		
 		for (UserInstance userInstance : userInstances) {
@@ -60,13 +63,13 @@ public class UserInstanceServiceTest {
 	
 	@Test
 	public void shouldReturnUserInstancesWithStatusOff() {
-		service.createInstances(userOne, 5, InstanceStatus.OFF);
-		service.createInstances(userOne, 10, InstanceStatus.ON);
+		service.createInstances(userOne, 5, InstanceStatus.OFF, ubuntu12_04);
+		service.createInstances(userOne, 10, InstanceStatus.ON, ubuntu12_04);
 		List<UserInstance> userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
 		assertEquals(5, userInstances.size());
 		
-		service.createInstances(userOne, 3, InstanceStatus.OFF);
-		service.createInstances(userOne, 15, InstanceStatus.ON);
+		service.createInstances(userOne, 3, InstanceStatus.OFF, ubuntu12_04);
+		service.createInstances(userOne, 15, InstanceStatus.ON, ubuntu12_04);
 		userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
 		assertEquals(8, userInstances.size());
 		
@@ -77,11 +80,11 @@ public class UserInstanceServiceTest {
 	
 	@Test
 	public void shouldNotReturnUserInstancesFromAnotherUser() {
-		service.createInstances(userTwo, 10, InstanceStatus.OFF);
+		service.createInstances(userTwo, 10, InstanceStatus.OFF, windowsServer2003);
 		List<UserInstance> userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
 		assertEquals(0, userInstances.size());
 		
-		service.createInstances(userOne, 5, InstanceStatus.OFF);
+		service.createInstances(userOne, 5, InstanceStatus.OFF, windowsServer2003);
 		userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
 		assertEquals(5, userInstances.size());
 		
@@ -93,8 +96,8 @@ public class UserInstanceServiceTest {
 	
 	@Test
 	public void shouldReturnUserInstances() {
-		service.createInstances(userOne, 5, InstanceStatus.OFF);
-		service.createInstances(userOne, 10, InstanceStatus.ON);
+		service.createInstances(userOne, 5, InstanceStatus.OFF, windowsServer2003);
+		service.createInstances(userOne, 10, InstanceStatus.ON, windowsServer2003);
 		List<UserInstance> userInstances = service.getInstancesByUser(userOne);
 		assertEquals(15, userInstances.size());
 	}
@@ -116,13 +119,13 @@ public class UserInstanceServiceTest {
 	
 	@Test
 	public void shouldReturnUserInstancesWithStatusOn() {
-		service.createInstances(userOne, 5, InstanceStatus.OFF);
-		service.createInstances(userOne, 10, InstanceStatus.ON);
+		service.createInstances(userOne, 5, InstanceStatus.OFF, windowsServer2003);
+		service.createInstances(userOne, 10, InstanceStatus.ON, windowsServer2003);
 		List<UserInstance> userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.ON);
 		assertEquals(10, userInstances.size());
 		
-		service.createInstances(userOne, 3, InstanceStatus.OFF);
-		service.createInstances(userOne, 15, InstanceStatus.ON);
+		service.createInstances(userOne, 3, InstanceStatus.OFF, windowsServer2003);
+		service.createInstances(userOne, 15, InstanceStatus.ON, windowsServer2003);
 		userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.ON);
 		assertEquals(25, userInstances.size());
 		
@@ -133,7 +136,7 @@ public class UserInstanceServiceTest {
 	
 	@Test
 	public void shouldCreateUserInstancesWithStatusOn() {
-		final List<UserInstance> userInstances = service.createInstances(userOne, 5, InstanceStatus.ON);
+		final List<UserInstance> userInstances = service.createInstances(userOne, 5, InstanceStatus.ON, ubuntu12_04);
 		assertEquals(5, userInstances.size());
 		
 		for (UserInstance userInstance : userInstances) {
