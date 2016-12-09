@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.computing.cloud.domain.OperationalSystem;
+import com.computing.cloud.domain.OperatingSystem;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.domain.User.UserBuilder;
@@ -28,8 +28,8 @@ public class UserInstanceServiceTest {
 	private UserInstanceService service;
 	private static User userOne;
 	private static User userTwo;
-	private static OperationalSystem windowsServer2003 = new OperationalSystem("Windows Server 2003");
-	private static OperationalSystem ubuntu12_04 = new OperationalSystem("Ubuntu 12.04");
+	private static OperatingSystem windowsServer2003 = new OperatingSystem("Windows Server 2003");
+	private static OperatingSystem ubuntu12_04 = new OperatingSystem("Ubuntu 12.04");
 	
 	@BeforeClass
 	public static void setUp() {

@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode
-public class OperationalSystem {
+public class OperatingSystem {
 	
 	private Long id;
 	private String name;
 	
-	public OperationalSystem(String name) {
+	public OperatingSystem(String name) {
 		this.name = name;
 	}
 

@@ -13,15 +13,15 @@ public class UserInstance {
 	@Setter
 	private Long id;
 	private User user;
-	private OperationalSystem operationalSystem;
+	private OperatingSystem operatingSystem;
 	private String instanceUniqueName;
 	private InstanceStatus status;
 	
-	public UserInstance(User user, InstanceStatus status, OperationalSystem operationalSystem) {
+	public UserInstance(User user, InstanceStatus status, OperatingSystem operatingSystem) {
 		this.user = user;
 		this.instanceUniqueName = UUID.randomUUID().toString();
 		this.status = status;
-		this.operationalSystem = operationalSystem;
+		this.operatingSystem = operatingSystem;
 	}
 
 }
