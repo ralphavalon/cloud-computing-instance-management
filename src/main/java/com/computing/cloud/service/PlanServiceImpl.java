@@ -59,7 +59,7 @@ public class PlanServiceImpl implements PlanService {
 				return planStorageType;
 			}
 		}
-		throw new FileNotFoundException("No storage type found on " + planStorageTypeSet );
+		throw new FileNotFoundException("No storage type found on " + "" );
 	}
 	
 	private BigDecimal add(BigDecimal... values) {

@@ -3,6 +3,7 @@ package com.computing.cloud.service;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +39,14 @@ public class PlanServiceTest extends AbstractTest {
 		assertEqualsBigDecimal(new BigDecimal(0.206), pricePerHour);
 		
 		assertNotNull(service.findAll().get(0));
+	}
+	
+	@Transactional
+	@Test
+	public void shouldRetrieveAllPlans() throws Exception {
+		final List<Plan> plans = service.findAll();
+		
+		assertNotNull(plans.toString());
 	}
 
 }

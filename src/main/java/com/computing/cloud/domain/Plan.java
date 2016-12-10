@@ -12,20 +12,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access=AccessLevel.PACKAGE)
-@AllArgsConstructor
-@Getter @Builder
+@Getter
 @Entity
 public class Plan {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private Long id;
+	
 	private String name;
 	
 	@Column(precision = 19, scale = 6)
@@ -35,7 +34,7 @@ public class Plan {
 	@Column(precision = 19, scale = 6)
 	private BigDecimal pricePerStorage;
 	
-	@OneToMany(mappedBy="plan", fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER)
 	private Set<PlanStorageType> planStorageType;
 	
 }

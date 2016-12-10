@@ -9,11 +9,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.computing.cloud.domain.History;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
 
+@Repository
 public interface HistoryRepository extends CrudRepository<History, Long>{
 	
 	List<History> findByUser(User user);

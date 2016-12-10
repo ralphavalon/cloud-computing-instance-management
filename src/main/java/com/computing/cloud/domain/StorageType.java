@@ -1,5 +1,6 @@
 package com.computing.cloud.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class StorageType {
 	@Setter
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "storage_type_id")
 	private Long id;
 	private String name;
 	
