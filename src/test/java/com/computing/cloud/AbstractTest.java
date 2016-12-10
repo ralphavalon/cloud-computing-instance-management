@@ -13,8 +13,10 @@ import com.computing.cloud.domain.Instance;
 import com.computing.cloud.domain.OperatingSystem;
 import com.computing.cloud.domain.StorageType;
 import com.computing.cloud.domain.User;
+import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.domain.Instance.InstanceBuilder;
 import com.computing.cloud.domain.User.UserBuilder;
+import com.computing.cloud.enums.InstanceStatus;
 
 public abstract class AbstractTest {
 	
@@ -31,6 +33,8 @@ public abstract class AbstractTest {
 	protected static OperatingSystem ubuntu12_04 = new OperatingSystem("Ubuntu 12.04");
 	protected static StorageType hdd = new StorageType("HDD");
 	protected static StorageType ssd = new StorageType("SSD");
+	protected static UserInstance userOneInstance = new UserInstance(userOne, InstanceStatus.OFF, small, ubuntu12_04);
+	protected static UserInstance userTwoInstance = new UserInstance(userTwo, InstanceStatus.OFF, small, windowsServer2003);
 	
 	protected void expect(Class<? extends Exception> exceptionClass, String message) {
 		thrown.expect(exceptionClass);
@@ -44,6 +48,9 @@ public abstract class AbstractTest {
 		
 		windowsServer2003.setId(1L);
 		ubuntu12_04.setId(2L);
+		
+		userOneInstance.setId(1L);
+		userTwoInstance.setId(5L);
 		
 		UserBuilder builder = User.builder();
 		builder

@@ -1,7 +1,6 @@
 package com.computing.cloud.service;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +21,9 @@ public class InstanceServiceTest {
 	@Test
 	public void shouldGetInstance() throws AuthenticationException {
 		Instance instance = service.findById(1L);
-		assertNotNull(instance.getId());
-		assertTrue(instance.getId() > 0);
+		assertNotNull(instance);
+		assertNotNull(instance.getPlan());
+		assertNotNull(instance.getStorageType());
 	}
 	
 }
