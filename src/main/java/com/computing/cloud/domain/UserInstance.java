@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,6 @@ import lombok.Setter;
 import com.computing.cloud.enums.InstanceStatus;
 
 @NoArgsConstructor(access=AccessLevel.PACKAGE)
-@AllArgsConstructor
 @Getter
 @EqualsAndHashCode(exclude={"status", "user", "operatingSystem", "instance"})
 @Entity
