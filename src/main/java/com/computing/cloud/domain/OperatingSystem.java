@@ -9,6 +9,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor(access=AccessLevel.PACKAGE)
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class OperatingSystem {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Setter
 	private Long id;
 	private String name;
 	

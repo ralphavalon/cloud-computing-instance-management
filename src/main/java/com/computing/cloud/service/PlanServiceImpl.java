@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.computing.cloud.dao.PlanRepository;
 import com.computing.cloud.domain.Instance;
@@ -13,6 +14,7 @@ import com.computing.cloud.domain.PlanStorageType;
 import com.computing.cloud.domain.StorageType;
 
 @Service
+@Transactional
 public class PlanServiceImpl implements PlanService {
 
 	@Autowired

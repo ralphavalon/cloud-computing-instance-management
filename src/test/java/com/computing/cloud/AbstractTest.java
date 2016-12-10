@@ -23,6 +23,7 @@ public abstract class AbstractTest {
 	
 	protected static User userOne;
 	protected static User userTwo;
+	protected static User userThree;
 	protected static Instance small;
 	protected static Instance medium;
 	protected static Instance large;
@@ -41,13 +42,35 @@ public abstract class AbstractTest {
 		hdd.setId(1L);
 		ssd.setId(2L);
 		
+		windowsServer2003.setId(1L);
+		ubuntu12_04.setId(2L);
+		
 		UserBuilder builder = User.builder();
-		builder.username("userOne");
+		builder
+			.id(1L)
+			.username("userOne")
+			.password("passOne")
+			.email("userOne@test.com")
+			.creditCard("5555555555554444");
 		userOne = builder.build();
 		
 		builder = User.builder();
-		builder.username("userTwo");
+		builder
+			.id(2L)
+			.username("userTwo")
+			.password("passTwo")
+			.email("userTwo@test.com")
+			.creditCard("5105105105105100");
 		userTwo = builder.build();
+		
+		builder = User.builder();
+		builder
+			.id(3L)
+			.username("userThree")
+			.password("passThree")
+			.email("userThree@test.com")
+			.creditCard("4111111111111111");
+		userThree = builder.build();
 		
 		InstanceBuilder instanceBuilder = Instance.builder();
 		instanceBuilder

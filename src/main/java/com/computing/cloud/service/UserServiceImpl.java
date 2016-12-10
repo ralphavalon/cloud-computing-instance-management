@@ -2,6 +2,7 @@ package com.computing.cloud.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.computing.cloud.dao.UserRepository;
 import com.computing.cloud.domain.Authentication;
@@ -9,6 +10,7 @@ import com.computing.cloud.domain.User;
 import com.computing.cloud.exception.AuthenticationException;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired

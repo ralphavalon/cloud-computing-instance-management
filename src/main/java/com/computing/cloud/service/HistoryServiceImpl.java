@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.computing.cloud.dao.HistoryRepository;
 import com.computing.cloud.domain.History;
@@ -12,6 +13,7 @@ import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
 
 @Service
+@Transactional
 public class HistoryServiceImpl implements HistoryService {
 	
 	@Autowired

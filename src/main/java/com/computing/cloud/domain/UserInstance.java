@@ -37,6 +37,7 @@ public class UserInstance {
 	private Instance instance;
 	@ManyToOne(fetch=FetchType.EAGER)
 	private OperatingSystem operatingSystem;
+	
 	private String instanceUniqueName;
 	
 	@Enumerated(EnumType.STRING)

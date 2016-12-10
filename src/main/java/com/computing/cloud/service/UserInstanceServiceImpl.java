@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.computing.cloud.dao.UserInstanceRepository;
 import com.computing.cloud.domain.Instance;
@@ -14,6 +15,7 @@ import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.enums.InstanceStatus;
 
 @Service
+@Transactional
 public class UserInstanceServiceImpl implements UserInstanceService {
 	
 	@Autowired

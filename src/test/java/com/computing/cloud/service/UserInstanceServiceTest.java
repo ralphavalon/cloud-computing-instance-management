@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,31 +60,32 @@ public class UserInstanceServiceTest extends AbstractTest {
 		service.createInstances(userOneInstance(InstanceStatus.OFF, small, ubuntu12_04), 5);
 		service.createInstances(userOneInstance(InstanceStatus.ON, small, ubuntu12_04), 10);
 		List<UserInstance> userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
-		assertEquals(5, userInstances.size());
+		assertEquals(9, userInstances.size());
 		
 		service.createInstances(userOneInstance(InstanceStatus.OFF, small, ubuntu12_04), 3);
 		service.createInstances(userOneInstance(InstanceStatus.ON, small, ubuntu12_04), 15);
 		userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
-		assertEquals(8, userInstances.size());
+		assertEquals(12, userInstances.size());
 		
 		for (UserInstance userInstance : userInstances) {
 			assertEquals(InstanceStatus.OFF, userInstance.getStatus());
 		}
 	}
 	
+	@Transactional
 	@Test
 	public void shouldNotReturnUserInstancesFromAnotherUser() {
 		service.createInstances(userTwoInstance(InstanceStatus.OFF, small, windowsServer2003), 10);
 		List<UserInstance> userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
-		assertEquals(0, userInstances.size());
+		assertEquals(4, userInstances.size());
 		
 		service.createInstances(userOneInstance(InstanceStatus.OFF, small, windowsServer2003), 5);
 		userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
-		assertEquals(5, userInstances.size());
+		assertEquals(9, userInstances.size());
 		
 		for (UserInstance userInstance : userInstances) {
 			assertEquals(InstanceStatus.OFF, userInstance.getStatus());
-			assertEquals(userOne.getUsername(), userInstance.getUser().getUsername());
+			assertEquals(userOne, userInstance.getUser());
 		}
 	}
 	
@@ -91,21 +94,18 @@ public class UserInstanceServiceTest extends AbstractTest {
 		service.createInstances(userOneInstance(InstanceStatus.OFF, small, windowsServer2003), 5);
 		service.createInstances(userOneInstance(InstanceStatus.ON, small, windowsServer2003), 10);
 		List<UserInstance> userInstances = service.getInstancesByUser(userOne);
-		assertEquals(15, userInstances.size());
+		assertEquals(19, userInstances.size());
 	}
 	
 	@Test
 	public void shouldReturnEmptyListIfNoUserInstances() {
-		List<UserInstance> userInstances = service.getInstancesByUser(userOne);
+		List<UserInstance> userInstances = service.getInstancesByUser(userThree);
 		assertEquals(0, userInstances.size());
 	}
 	
 	@Test
 	public void shouldReturnEmptyListIfNoUserInstancesWithAnyStatus() {
-		List<UserInstance> userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.OFF);
-		assertEquals(0, userInstances.size());
-		
-		userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.ON);
+		List<UserInstance> userInstances = service.getInstancesByUserAndStatus(userOne, InstanceStatus.ON);
 		assertEquals(0, userInstances.size());
 	}
 	
