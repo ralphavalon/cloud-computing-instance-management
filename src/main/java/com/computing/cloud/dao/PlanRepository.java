@@ -1,13 +1,9 @@
 package com.computing.cloud.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
 import com.computing.cloud.domain.Plan;
 
-public interface PlanRepository {
+public interface PlanRepository extends CrudRepository<Plan, Long> {
 	
-	Plan findOne(Long id);
-	
-	List<Plan> findAll();
-
 }
