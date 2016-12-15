@@ -3,23 +3,25 @@ package com.computing.cloud.to.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.computing.cloud.domain.Instance;
+import com.computing.cloud.domain.OperatingSystem;
 import com.computing.cloud.domain.User;
-import com.computing.cloud.domain.User.UserBuilder;
+import com.computing.cloud.domain.UserInstance;
+import com.computing.cloud.enums.InstanceStatus;
 
 @Getter
 @NoArgsConstructor
-public class CreateUserInstanceRequestTO extends UserRequestTO {
+public class CreateUserInstanceRequestTO {
 
-	private String password;
+	private Long userId;
+	private Long instanceId;
+	private Long operatingSystemId;
+	private InstanceStatus status;
 
-	public User toDomain() {
-		UserBuilder builder = User.builder()
-				.creditCard(getCreditCard())
-				.email(getEmail())
-				.username(getUsername())
-				.password(getPassword())
-				.status(Boolean.TRUE);
-		return builder.build();
+	private int quantity;
+
+	public UserInstance toDomain(User user, Instance instance, OperatingSystem operatingSystem) {
+		return new UserInstance(user, getStatus(), instance, operatingSystem);
 	}
 
 }

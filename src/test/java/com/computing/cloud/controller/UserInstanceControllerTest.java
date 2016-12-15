@@ -2,7 +2,11 @@ package com.computing.cloud.controller;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.HttpStatus;
 import org.junit.Test;
@@ -14,6 +18,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.computing.cloud.AbstractSystemTest;
 import com.computing.cloud.enums.InstanceStatus;
 import com.computing.cloud.to.response.UserInstanceResponseTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.restassured.http.ContentType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext(classMode=ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -66,22 +73,45 @@ public class UserInstanceControllerTest extends AbstractSystemTest {
 			
 		}
 		
-//		@Test
-//		public void apiShouldCreateUserInstance() throws Exception {
-//			UserInstanceResponseTO response = given()
-//				.contentType(ContentType.JSON)
-//				.body(getCreateUserInstanceRequestTO())
-//				.post(getUrl()+"/userInstances/")
-//				.then()
-//					.statusCode(HttpStatus.SC_CREATED)
-//					.extract().body().as(UserInstanceResponseTO.class);
-//			
-//			assertNotNull( response );
-//			assertEquals(new Long(4), response.getId());
-//			assertEquals("userInstanceFour" , response.getUserInstance());
-//			assertEquals("new_email@test.com" , response.getEmail());
-//			assertEquals(Boolean.TRUE, response.getActive());
-//		}
+		@Test
+		public void apiShouldCreateUserInstances() throws Exception {
+			UserInstanceResponseTO[] responseTOArray = given()
+				.contentType(ContentType.JSON)
+				.body(getCreateUserInstanceRequestTO())
+				.post(getUrl()+"/userInstances/")
+				.then()
+					.statusCode(HttpStatus.SC_CREATED)
+					.extract().body().as(UserInstanceResponseTO[].class);
+			
+			assertNotNull( responseTOArray );
+			assertEquals(3, responseTOArray.length);
+			
+			UserInstanceResponseTO firstCreated = responseTOArray[0];
+			UserInstanceResponseTO secondCreated = responseTOArray[1];
+			UserInstanceResponseTO thirdCreated = responseTOArray[2];
+			
+			assertEquals(new Long(7), firstCreated.getId());
+			assertEquals(new Long(1), firstCreated.getInstanceId());
+			assertEquals("small", firstCreated.getInstanceName());
+			assertEquals("Ubuntu 12.04", firstCreated.getOperatingSystem());
+			assertEquals(InstanceStatus.OFF, firstCreated.getStatus());
+			
+			assertEquals(new Long(8), secondCreated.getId());
+			assertEquals(new Long(1), secondCreated.getInstanceId());
+			assertEquals("small", secondCreated.getInstanceName());
+			assertEquals("Ubuntu 12.04", secondCreated.getOperatingSystem());
+			assertEquals(InstanceStatus.OFF, secondCreated.getStatus());
+			
+			assertEquals(new Long(9), thirdCreated.getId());
+			assertEquals(new Long(1), thirdCreated.getInstanceId());
+			assertEquals("small", thirdCreated.getInstanceName());
+			assertEquals("Ubuntu 12.04", thirdCreated.getOperatingSystem());
+			assertEquals(InstanceStatus.OFF, thirdCreated.getStatus());
+			
+			assertNotEquals(secondCreated, firstCreated.getUserInstanceName());
+			assertNotEquals(thirdCreated, firstCreated.getUserInstanceName());
+			assertNotEquals(secondCreated, thirdCreated.getUserInstanceName());
+		}
 //		
 //		@Test
 //		public void apiShouldUpdateUserInstance() throws Exception {
@@ -94,14 +124,15 @@ public class UserInstanceControllerTest extends AbstractSystemTest {
 //			
 //		}
 //		
-//		private String getCreateUserInstanceRequestTO() throws JsonProcessingException {
-//			Map<String, String> createUserInstanceMap = new HashMap<String, String>();
-//			createUserInstanceMap.put("userInstancename", "userInstanceFour");
-//			createUserInstanceMap.put("password", "mypass123");
-//			createUserInstanceMap.put("email", "new_email@test.com");
-//			createUserInstanceMap.put("creditCard", "5105105105105100");
-//			return new ObjectMapper().writeValueAsString(createUserInstanceMap);
-//		}
+		private String getCreateUserInstanceRequestTO() throws JsonProcessingException {
+			Map<String, Object> createUserInstanceMap = new HashMap<String, Object>();
+			createUserInstanceMap.put("userId", 2L);
+			createUserInstanceMap.put("instanceId", 1L);
+			createUserInstanceMap.put("operatingSystemId", 2L);
+			createUserInstanceMap.put("status", InstanceStatus.OFF);
+			createUserInstanceMap.put("quantity", 3);
+			return new ObjectMapper().writeValueAsString(createUserInstanceMap);
+		}
 //		
 //		private String getUpdateUserInstanceRequestTO() throws JsonProcessingException {
 //			Map<String, Object> createUserInstanceMap = new HashMap<String, Object>();
