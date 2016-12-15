@@ -1,7 +1,5 @@
 package com.computing.cloud.service;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
@@ -51,15 +49,12 @@ public class PlanServiceImpl implements PlanService {
 	
 	private PlanStorageType getPlanStorageType(Plan plan, StorageType storageType) throws Exception {
 		final Set<PlanStorageType> planStorageTypeSet = plan.getPlanStorageType();
-		if(planStorageTypeSet.isEmpty()) {
-			throw new IOException("planStorageTypeList");
-		}
 		for (PlanStorageType planStorageType : planStorageTypeSet) {
 			if(planStorageType.getStorageType().equals(storageType)) {
 				return planStorageType;
 			}
 		}
-		throw new FileNotFoundException("No storage type found on " + "" );
+		throw new Exception("No storage type found on " + plan.getName() );
 	}
 	
 	private BigDecimal add(BigDecimal... values) {

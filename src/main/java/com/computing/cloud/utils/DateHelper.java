@@ -1,5 +1,6 @@
 package com.computing.cloud.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,6 +30,11 @@ public class DateHelper {
 		calendar.set(Calendar.MILLISECOND, 0);
 		return calendar;
 	}
+    
+    public static String fromDateToString(Date date, String format) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(date);
+    }
 
     public static boolean isBetween(Date mainDate, Date greaterEqualDate, Date lessEqualDate) {
         return isGreaterEqualThan(mainDate, greaterEqualDate) && isLessEqualThan(mainDate, lessEqualDate);
