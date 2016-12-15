@@ -93,13 +93,13 @@ public class UserInstanceServiceTest extends AbstractTest {
 	public void shouldReturnUserInstances() {
 		service.createInstances(userOneInstance(InstanceStatus.OFF, small, windowsServer2003), 5);
 		service.createInstances(userOneInstance(InstanceStatus.ON, small, windowsServer2003), 10);
-		List<UserInstance> userInstances = service.getInstancesByUser(userOne);
+		List<UserInstance> userInstances = service.getInstancesByUser(userOne.getId());
 		assertEquals(19, userInstances.size());
 	}
 	
 	@Test
 	public void shouldReturnEmptyListIfNoUserInstances() {
-		List<UserInstance> userInstances = service.getInstancesByUser(userThree);
+		List<UserInstance> userInstances = service.getInstancesByUser(userThree.getId());
 		assertEquals(0, userInstances.size());
 	}
 	

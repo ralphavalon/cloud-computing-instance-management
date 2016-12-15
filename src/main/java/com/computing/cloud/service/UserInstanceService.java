@@ -10,8 +10,10 @@ public interface UserInstanceService {
 	
 	List<UserInstance> createInstances(UserInstance userInstance, int quantity);
 	
-	List<UserInstance> getInstancesByUser(User user);
+	List<UserInstance> getInstancesByUser(Long userId);
 	
 	List<UserInstance> getInstancesByUserAndStatus(User user, InstanceStatus status);
+	
+	UserInstance findById(Long id);
 
 }
