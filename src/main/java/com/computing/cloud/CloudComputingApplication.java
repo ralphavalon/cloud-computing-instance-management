@@ -9,4 +9,5 @@ public class CloudComputingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CloudComputingApplication.class, args);
 	}
+	
 }

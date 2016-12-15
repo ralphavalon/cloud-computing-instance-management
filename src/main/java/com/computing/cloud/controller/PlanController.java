@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.computing.cloud.domain.Plan;
 import com.computing.cloud.service.PlanService;
+import com.computing.cloud.to.response.PlanResponseTO;
 
 @RestController
 @RequestMapping(value="/plans")
@@ -21,15 +21,15 @@ public class PlanController {
 	private PlanService service;
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public ResponseEntity<List<Plan>> findAll() {
-		List<Plan> plans = service.findAll();
-		return new ResponseEntity<List<Plan>>(plans, HttpStatus.OK);
+	public ResponseEntity<List<PlanResponseTO>> findAll() {
+		List<PlanResponseTO> plans = PlanResponseTO.toTOList(service.findAll());
+		return new ResponseEntity<List<PlanResponseTO>>(plans, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Plan> findByExternalId(@PathVariable("id") String id) {
-		Plan plan = service.findById(Long.valueOf(id));
-		return new ResponseEntity<Plan>(plan, HttpStatus.OK);
+	public ResponseEntity<PlanResponseTO> findByExternalId(@PathVariable("id") String id) {
+		PlanResponseTO plan = new PlanResponseTO( service.findById(Long.valueOf(id)) );
+		return new ResponseEntity<PlanResponseTO>(plan, HttpStatus.OK);
 	}
 
 }

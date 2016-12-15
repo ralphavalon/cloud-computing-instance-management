@@ -28,7 +28,7 @@ spring:
   database:
     driverClassName: org.h2.Driver
   datasource:
-    url: jdbc:h2:~/cloud_computing_test;MV_STORE=FALSE;MVCC=FALSE
+    url: jdbc:h2:~/cloud_computing_test;MV_STORE=FALSE;MVCC=FALSE;DB_CLOSE_ON_EXIT=FALSE
     username: sa
     password: 
     properties:

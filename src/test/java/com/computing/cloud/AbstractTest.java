@@ -8,6 +8,7 @@ import java.math.RoundingMode;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.computing.cloud.domain.Instance;
 import com.computing.cloud.domain.OperatingSystem;
@@ -18,6 +19,7 @@ import com.computing.cloud.domain.Instance.InstanceBuilder;
 import com.computing.cloud.domain.User.UserBuilder;
 import com.computing.cloud.enums.InstanceStatus;
 
+@ActiveProfiles("test")
 public abstract class AbstractTest {
 	
 	@Rule
