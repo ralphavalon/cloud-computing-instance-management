@@ -4,15 +4,24 @@ import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.computing.cloud.AbstractSystemTest;
 import com.computing.cloud.to.response.UserResponseTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.restassured.http.ContentType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@DirtiesContext(classMode=ClassMode.BEFORE_EACH_TEST_METHOD)
 public class UserControllerTest extends AbstractSystemTest {
 	
 		@Test
@@ -54,6 +63,31 @@ public class UserControllerTest extends AbstractSystemTest {
 			assertEquals(new Long(3), responseTO.getId());
 			assertEquals("userThree" , responseTO.getUser());
 			assertEquals("userThree@test.com" , responseTO.getEmail());
+		}
+		
+		@Test
+		public void apiShouldCreateUser() throws Exception {
+			UserResponseTO response = given()
+				.contentType(ContentType.JSON)
+				.body(getCreateUserRequestTO())
+				.post(getUrl()+"/users/")
+				.then()
+					.statusCode(HttpStatus.SC_CREATED)
+					.extract().body().as(UserResponseTO.class);
+			
+			assertNotNull( response );
+			assertEquals(new Long(4), response.getId());
+			assertEquals("userFour" , response.getUser());
+			assertEquals("new_email@test.com" , response.getEmail());
+		}
+		
+		private String getCreateUserRequestTO() throws JsonProcessingException {
+			Map<String, String> createUserMap = new HashMap<String, String>();
+			createUserMap.put("username", "userFour");
+			createUserMap.put("password", "mypass123");
+			createUserMap.put("email", "new_email@test.com");
+			createUserMap.put("creditCard", "5105105105105100");
+			return new ObjectMapper().writeValueAsString(createUserMap);
 		}
 		
 }

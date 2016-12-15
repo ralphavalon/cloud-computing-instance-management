@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.computing.cloud.service.UserService;
+import com.computing.cloud.to.request.CreateUserRequestTO;
 import com.computing.cloud.to.response.UserResponseTO;
 
 @RestController
@@ -30,6 +32,12 @@ public class UserController {
 	public ResponseEntity<UserResponseTO> findByExternalId(@PathVariable("id") String id) {
 		UserResponseTO user = new UserResponseTO( service.findById(Long.valueOf(id)) );
 		return new ResponseEntity<UserResponseTO>(user, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/", method=RequestMethod.POST)
+	public ResponseEntity<UserResponseTO> create(@RequestBody CreateUserRequestTO userRequestTO) {
+		UserResponseTO user = new UserResponseTO( service.saveUser( userRequestTO.toDomain()) );
+		return new ResponseEntity<UserResponseTO>(user, HttpStatus.CREATED);
 	}
 
 }
