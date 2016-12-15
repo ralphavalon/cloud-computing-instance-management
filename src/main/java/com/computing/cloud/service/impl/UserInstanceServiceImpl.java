@@ -1,4 +1,4 @@
-package com.computing.cloud.service;
+package com.computing.cloud.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import com.computing.cloud.domain.OperatingSystem;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.enums.InstanceStatus;
+import com.computing.cloud.service.UserInstanceService;
 import com.computing.cloud.to.request.CreateUserInstanceRequestTO;
 
 @Service

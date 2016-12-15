@@ -1,4 +1,4 @@
-package com.computing.cloud.service;
+package com.computing.cloud.service.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import com.computing.cloud.dao.UserRepository;
 import com.computing.cloud.domain.Authentication;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.exception.AuthenticationException;
+import com.computing.cloud.service.UserService;
 import com.computing.cloud.utils.UserCopyProperties;
 
 @Service

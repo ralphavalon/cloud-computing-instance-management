@@ -1,4 +1,4 @@
-package com.computing.cloud.service;
+package com.computing.cloud.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +11,7 @@ import com.computing.cloud.dao.HistoryRepository;
 import com.computing.cloud.domain.History;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
+import com.computing.cloud.service.HistoryService;
 
 @Service
 @Transactional

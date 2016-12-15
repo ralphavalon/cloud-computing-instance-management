@@ -1,4 +1,4 @@
-package com.computing.cloud.service;
+package com.computing.cloud.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.computing.cloud.dao.InstanceRepository;
 import com.computing.cloud.domain.Instance;
+import com.computing.cloud.service.InstanceService;
 
 @Service
 @Transactional

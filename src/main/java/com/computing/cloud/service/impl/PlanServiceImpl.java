@@ -1,4 +1,4 @@
-package com.computing.cloud.service;
+package com.computing.cloud.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,6 +13,7 @@ import com.computing.cloud.domain.Instance;
 import com.computing.cloud.domain.Plan;
 import com.computing.cloud.domain.PlanStorageType;
 import com.computing.cloud.domain.StorageType;
+import com.computing.cloud.service.PlanService;
 
 @Service
 @Transactional
