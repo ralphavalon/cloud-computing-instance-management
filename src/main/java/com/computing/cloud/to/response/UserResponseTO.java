@@ -16,11 +16,13 @@ public class UserResponseTO {
 	private Long id;
 	private String user;
 	private String email;
+	private Boolean active;
 	
 	public UserResponseTO(User user) {
 		this.id = user.getId();
 		this.user = user.getUsername();
 		this.email = user.getEmail();
+		this.active = user.getStatus();
 	}
 	
 	public static List<UserResponseTO> toTOList(List<User> entityList) {

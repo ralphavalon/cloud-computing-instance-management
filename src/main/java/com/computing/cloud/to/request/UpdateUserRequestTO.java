@@ -9,12 +9,15 @@ import com.computing.cloud.domain.User.UserBuilder;
 @Getter
 @NoArgsConstructor
 public class UpdateUserRequestTO extends UserRequestTO {
-
+	
+	private Boolean status;
+	
 	public User toDomain() {
 		UserBuilder builder = User.builder()
 				.creditCard(getCreditCard())
 				.email(getEmail())
-				.username(getUsername());
+				.username(getUsername())
+				.status(getStatus());
 		return builder.build();
 	}
 

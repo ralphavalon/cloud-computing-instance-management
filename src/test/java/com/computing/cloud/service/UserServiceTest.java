@@ -29,6 +29,7 @@ public class UserServiceTest extends AbstractTest {
 					.password("password")
 					.creditCard("creditCard")
 					.email("email")
+					.status(Boolean.TRUE)
 					.build();
 		user = service.create(user);
 		assertNotNull(user.getId());

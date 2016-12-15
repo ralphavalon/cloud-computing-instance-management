@@ -60,7 +60,8 @@ public abstract class AbstractTest {
 			.username("userOne")
 			.password("passOne")
 			.email("userOne@test.com")
-			.creditCard("5555555555554444");
+			.creditCard("5555555555554444")
+			.status(Boolean.TRUE);
 		userOne = builder.build();
 		
 		builder = User.builder();
@@ -69,7 +70,8 @@ public abstract class AbstractTest {
 			.username("userTwo")
 			.password("passTwo")
 			.email("userTwo@test.com")
-			.creditCard("5105105105105100");
+			.creditCard("5105105105105100")
+			.status(Boolean.TRUE);
 		userTwo = builder.build();
 		
 		builder = User.builder();
@@ -78,7 +80,8 @@ public abstract class AbstractTest {
 			.username("userThree")
 			.password("passThree")
 			.email("userThree@test.com")
-			.creditCard("4111111111111111");
+			.creditCard("4111111111111111")
+			.status(Boolean.TRUE);
 		userThree = builder.build();
 		
 		InstanceBuilder instanceBuilder = Instance.builder();

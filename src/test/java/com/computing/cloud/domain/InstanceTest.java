@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.computing.cloud.AbstractTest;
 
-public class InstanceServiceTest extends AbstractTest {
+public class InstanceTest extends AbstractTest {
 	
 	@Test
 	public void builderContract() {

@@ -36,6 +36,7 @@ public class UserControllerTest extends AbstractSystemTest {
 			assertEquals(new Long(1), response.getId());
 			assertEquals("userOne" , response.getUser());
 			assertEquals("userOne@test.com" , response.getEmail());
+			assertEquals(Boolean.TRUE, response.getActive());
 		}
 		
 		@Test
@@ -53,16 +54,19 @@ public class UserControllerTest extends AbstractSystemTest {
 			assertEquals(new Long(1), responseTO.getId());
 			assertEquals("userOne" , responseTO.getUser());
 			assertEquals("userOne@test.com" , responseTO.getEmail());
+			assertEquals(Boolean.TRUE, responseTO.getActive());
 			
 			responseTO = responseTOArray[1];
 			assertEquals(new Long(2), responseTO.getId());
 			assertEquals("userTwo" , responseTO.getUser());
 			assertEquals("userTwo@test.com" , responseTO.getEmail());
+			assertEquals(Boolean.TRUE, responseTO.getActive());
 			
 			responseTO = responseTOArray[2];
 			assertEquals(new Long(3), responseTO.getId());
 			assertEquals("userThree" , responseTO.getUser());
 			assertEquals("userThree@test.com" , responseTO.getEmail());
+			assertEquals(Boolean.TRUE, responseTO.getActive());
 		}
 		
 		@Test
@@ -79,6 +83,7 @@ public class UserControllerTest extends AbstractSystemTest {
 			assertEquals(new Long(4), response.getId());
 			assertEquals("userFour" , response.getUser());
 			assertEquals("new_email@test.com" , response.getEmail());
+			assertEquals(Boolean.TRUE, response.getActive());
 		}
 		
 		@Test
@@ -102,10 +107,11 @@ public class UserControllerTest extends AbstractSystemTest {
 		}
 		
 		private String getUpdateUserRequestTO() throws JsonProcessingException {
-			Map<String, String> createUserMap = new HashMap<String, String>();
+			Map<String, Object> createUserMap = new HashMap<String, Object>();
 			createUserMap.put("username", "userOneUpdated");
 			createUserMap.put("email", "emailOneUpdated@test.com");
 			createUserMap.put("creditCard", "4012888888881881");
+			createUserMap.put("status", Boolean.FALSE);
 			return new ObjectMapper().writeValueAsString(createUserMap);
 		}
 		

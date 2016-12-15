@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.computing.cloud.AbstractTest;
 
-public class UserServiceTest extends AbstractTest {
+public class UserTest extends AbstractTest {
 	
 	@Test
 	public void equalsContract() {

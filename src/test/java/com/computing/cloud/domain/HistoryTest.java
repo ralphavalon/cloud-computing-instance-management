@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.computing.cloud.AbstractTest;
 
-public class HistoryServiceTest extends AbstractTest {
+public class HistoryTest extends AbstractTest {
 	
 	@Test
 	public void builderContract() {

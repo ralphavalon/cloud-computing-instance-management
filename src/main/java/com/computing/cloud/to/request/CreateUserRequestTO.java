@@ -17,7 +17,8 @@ public class CreateUserRequestTO extends UserRequestTO {
 				.creditCard(getCreditCard())
 				.email(getEmail())
 				.username(getUsername())
-				.password(getPassword());
+				.password(getPassword())
+				.status(Boolean.TRUE);
 		return builder.build();
 	}
 
