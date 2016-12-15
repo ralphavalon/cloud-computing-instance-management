@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.computing.cloud.service.UserService;
 import com.computing.cloud.to.request.CreateUserRequestTO;
+import com.computing.cloud.to.request.UpdateUserRequestTO;
 import com.computing.cloud.to.response.UserResponseTO;
 
 @RestController
@@ -36,8 +37,14 @@ public class UserController {
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ResponseEntity<UserResponseTO> create(@RequestBody CreateUserRequestTO userRequestTO) {
-		UserResponseTO user = new UserResponseTO( service.saveUser( userRequestTO.toDomain()) );
+		UserResponseTO user = new UserResponseTO( service.create( userRequestTO.toDomain()) );
 		return new ResponseEntity<UserResponseTO>(user, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<UserResponseTO> update(@PathVariable("id") String id, @RequestBody UpdateUserRequestTO userRequestTO) {
+		UserResponseTO user = new UserResponseTO( service.update( Long.valueOf(id), userRequestTO.toDomain()) );
+		return new ResponseEntity<UserResponseTO>(user, HttpStatus.NO_CONTENT);
 	}
 
 }

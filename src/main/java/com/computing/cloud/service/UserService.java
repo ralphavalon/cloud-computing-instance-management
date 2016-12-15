@@ -10,7 +10,9 @@ public interface UserService {
 	
 	Authentication login(String username, String password) throws AuthenticationException;
 	
-	User saveUser(User user);
+	User create(User user);
+	
+	User update(Long id, User user);
 	
 	User findById(Long id);
 	

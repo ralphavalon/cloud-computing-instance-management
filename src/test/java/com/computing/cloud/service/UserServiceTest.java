@@ -30,7 +30,7 @@ public class UserServiceTest extends AbstractTest {
 					.creditCard("creditCard")
 					.email("email")
 					.build();
-		user = service.saveUser(user);
+		user = service.create(user);
 		assertNotNull(user.getId());
 		assertTrue(user.getId() > 0);
 	}

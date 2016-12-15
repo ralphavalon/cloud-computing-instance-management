@@ -81,12 +81,31 @@ public class UserControllerTest extends AbstractSystemTest {
 			assertEquals("new_email@test.com" , response.getEmail());
 		}
 		
+		@Test
+		public void apiShouldUpdateUser() throws Exception {
+			given()
+				.contentType(ContentType.JSON)
+				.body(getUpdateUserRequestTO())
+				.put(getUrl()+"/users/1")
+				.then()
+					.statusCode(HttpStatus.SC_NO_CONTENT);
+			
+		}
+		
 		private String getCreateUserRequestTO() throws JsonProcessingException {
 			Map<String, String> createUserMap = new HashMap<String, String>();
 			createUserMap.put("username", "userFour");
 			createUserMap.put("password", "mypass123");
 			createUserMap.put("email", "new_email@test.com");
 			createUserMap.put("creditCard", "5105105105105100");
+			return new ObjectMapper().writeValueAsString(createUserMap);
+		}
+		
+		private String getUpdateUserRequestTO() throws JsonProcessingException {
+			Map<String, String> createUserMap = new HashMap<String, String>();
+			createUserMap.put("username", "userOneUpdated");
+			createUserMap.put("email", "emailOneUpdated@test.com");
+			createUserMap.put("creditCard", "4012888888881881");
 			return new ObjectMapper().writeValueAsString(createUserMap);
 		}
 		
