@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-public abstract class AbstractSystemTest {
+public abstract class AbstractSystemTest extends AbstractTest {
 
 	@Value("${local.server.port}")
 	private int port;

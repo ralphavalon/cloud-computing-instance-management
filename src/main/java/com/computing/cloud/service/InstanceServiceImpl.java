@@ -1,5 +1,7 @@
 package com.computing.cloud.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,11 @@ public class InstanceServiceImpl implements InstanceService {
 	@Override
 	public Instance findById(Long id) {
 		return instanceRepository.findOne(id);
+	}
+
+	@Override
+	public List<Instance> findAll() {
+		return (List<Instance>) instanceRepository.findAll();
 	}
 	
 }
