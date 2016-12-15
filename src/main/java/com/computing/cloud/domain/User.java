@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access=AccessLevel.PACKAGE)
 @AllArgsConstructor
-@Getter @Builder
+@Getter 
+@Builder
 @EqualsAndHashCode
 @Entity
 public class User {

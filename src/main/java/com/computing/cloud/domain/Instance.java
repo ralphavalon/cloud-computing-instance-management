@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access=AccessLevel.PACKAGE)
 @AllArgsConstructor
-@Getter @Builder
+@Getter 
+@Builder
 @Entity
 public class Instance {
 

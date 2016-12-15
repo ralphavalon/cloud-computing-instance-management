@@ -1,5 +1,6 @@
 package com.computing.cloud.domain;
 
+import static org.junit.Assert.assertEquals;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
@@ -18,6 +19,15 @@ public class UserInstanceServiceTest extends AbstractTest {
 	    .withIgnoredFields("status", "user", "operatingSystem", "instance")
 	    .withPrefabValues(Instance.class, small, medium)
 	    .verify();
+	}
+	
+	@Test
+	public void hashcodeContract() {
+		final UserInstance userInstanceA = new UserInstance();
+	    final UserInstance userInstanceB = new UserInstance();
+	    assertEquals(userInstanceA, userInstanceB);
+	    assertEquals(userInstanceA.hashCode(), userInstanceB.hashCode());
+	    assertEquals(userInstanceA.toString(), userInstanceB.toString());
 	}
 	
 }

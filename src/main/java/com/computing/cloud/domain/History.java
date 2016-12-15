@@ -18,17 +18,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import com.computing.cloud.enums.Operation;
 
 @NoArgsConstructor(access=AccessLevel.PACKAGE)
 @AllArgsConstructor
-@Getter @Builder
+@Getter 
+@Builder
 @Entity
 public class History {
 	
-	@Setter @Id
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne(fetch=FetchType.LAZY)
