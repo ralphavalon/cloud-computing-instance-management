@@ -9,7 +9,7 @@ public class UserCopyProperties extends DomainCopyProperties {
 	}
 
 	public static void copy(User source, User target) {
-		copyProperties(source, target, new String[]{ "email", "username", "creditCard" });
+		copyProperties(source, target, new String[]{ "email", "username", "creditCard", "status" });
 	}
 
 }

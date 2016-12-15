@@ -112,18 +112,18 @@ public class UserInstanceControllerTest extends AbstractSystemTest {
 			assertNotEquals(thirdCreated, firstCreated.getUserInstanceName());
 			assertNotEquals(secondCreated, thirdCreated.getUserInstanceName());
 		}
-//		
-//		@Test
-//		public void apiShouldUpdateUserInstance() throws Exception {
-//			given()
-//				.contentType(ContentType.JSON)
-//				.body(getUpdateUserInstanceRequestTO())
-//				.put(getUrl()+"/userInstances/1")
-//				.then()
-//					.statusCode(HttpStatus.SC_NO_CONTENT);
-//			
-//		}
-//		
+		
+		@Test
+		public void apiShouldUpdateUserInstance() throws Exception {
+			given()
+				.contentType(ContentType.JSON)
+				.body(getUpdateUserInstanceRequestTO())
+				.patch(getUrl()+"/userInstances/1")
+				.then()
+					.statusCode(HttpStatus.SC_NO_CONTENT);
+			
+		}
+		
 		private String getCreateUserInstanceRequestTO() throws JsonProcessingException {
 			Map<String, Object> createUserInstanceMap = new HashMap<String, Object>();
 			createUserInstanceMap.put("userId", 2L);
@@ -133,14 +133,11 @@ public class UserInstanceControllerTest extends AbstractSystemTest {
 			createUserInstanceMap.put("quantity", 3);
 			return new ObjectMapper().writeValueAsString(createUserInstanceMap);
 		}
-//		
-//		private String getUpdateUserInstanceRequestTO() throws JsonProcessingException {
-//			Map<String, Object> createUserInstanceMap = new HashMap<String, Object>();
-//			createUserInstanceMap.put("userInstancename", "userInstanceOneUpdated");
-//			createUserInstanceMap.put("email", "emailOneUpdated@test.com");
-//			createUserInstanceMap.put("creditCard", "4012888888881881");
-//			createUserInstanceMap.put("status", Boolean.FALSE);
-//			return new ObjectMapper().writeValueAsString(createUserInstanceMap);
-//		}
+		
+		private String getUpdateUserInstanceRequestTO() throws JsonProcessingException {
+			Map<String, Object> updateUserInstanceMap = new HashMap<String, Object>();
+			updateUserInstanceMap.put("status", InstanceStatus.ON);
+			return new ObjectMapper().writeValueAsString(updateUserInstanceMap);
+		}
 		
 }

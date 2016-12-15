@@ -17,6 +17,7 @@ import com.computing.cloud.service.OperatingSystemService;
 import com.computing.cloud.service.UserInstanceService;
 import com.computing.cloud.service.UserService;
 import com.computing.cloud.to.request.CreateUserInstanceRequestTO;
+import com.computing.cloud.to.request.UpdateUserInstanceRequestTO;
 import com.computing.cloud.to.response.UserInstanceResponseTO;
 
 @RestController
@@ -50,11 +51,11 @@ public class UserInstanceController {
 		List<UserInstanceResponseTO> userInstances = UserInstanceResponseTO.toTOList( createdUserInstances );
 		return new ResponseEntity<List<UserInstanceResponseTO>>(userInstances, HttpStatus.CREATED);
 	}
-//	
-//	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-//	public ResponseEntity<UserInstanceResponseTO> update(@PathVariable("id") String id, @RequestBody UpdateUserInstanceRequestTO userInstanceRequestTO) {
-//		UserInstanceResponseTO userInstance = new UserInstanceResponseTO( service.update( Long.valueOf(id), userInstanceRequestTO.toDomain()) );
-//		return new ResponseEntity<UserInstanceResponseTO>(userInstance, HttpStatus.NO_CONTENT);
-//	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PATCH)
+	public ResponseEntity<UserInstanceResponseTO> update(@PathVariable("id") String id, @RequestBody UpdateUserInstanceRequestTO userInstanceRequestTO) {
+		UserInstanceResponseTO userInstance = new UserInstanceResponseTO( userInstanceService.update( Long.valueOf(id), userInstanceRequestTO ) );
+		return new ResponseEntity<UserInstanceResponseTO>(userInstance, HttpStatus.NO_CONTENT);
+	}
 
 }

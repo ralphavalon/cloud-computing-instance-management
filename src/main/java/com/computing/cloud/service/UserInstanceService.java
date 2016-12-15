@@ -6,6 +6,7 @@ import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.enums.InstanceStatus;
 import com.computing.cloud.to.request.CreateUserInstanceRequestTO;
+import com.computing.cloud.to.request.UpdateUserInstanceRequestTO;
 
 public interface UserInstanceService {
 	
@@ -18,5 +19,7 @@ public interface UserInstanceService {
 	List<UserInstance> getInstancesByUserAndStatus(User user, InstanceStatus status);
 	
 	UserInstance findById(Long id);
+	
+	UserInstance update(Long id, UpdateUserInstanceRequestTO updateUserInstanceTO);
 
 }

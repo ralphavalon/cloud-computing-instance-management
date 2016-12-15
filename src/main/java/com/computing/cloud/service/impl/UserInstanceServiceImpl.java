@@ -18,6 +18,8 @@ import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.enums.InstanceStatus;
 import com.computing.cloud.service.UserInstanceService;
 import com.computing.cloud.to.request.CreateUserInstanceRequestTO;
+import com.computing.cloud.to.request.UpdateUserInstanceRequestTO;
+import com.computing.cloud.utils.UserInstanceCopyProperties;
 
 @Service
 @Transactional
@@ -37,10 +39,10 @@ public class UserInstanceServiceImpl implements UserInstanceService {
 
 	@Override
 	public List<UserInstance> createInstances(UserInstance userInstance, int quantity) {
-		User user = userInstance.getUser();
-		InstanceStatus status = userInstance.getStatus();
-		Instance instance = userInstance.getInstance();
-		OperatingSystem operatingSystem = userInstance.getOperatingSystem();
+		final User user = userInstance.getUser();
+		final InstanceStatus status = userInstance.getStatus();
+		final Instance instance = userInstance.getInstance();
+		final OperatingSystem operatingSystem = userInstance.getOperatingSystem();
 		
 		List<UserInstance> instances = new ArrayList<UserInstance>();
 		for (int i = 0; i < quantity; i++) {
@@ -69,10 +71,23 @@ public class UserInstanceServiceImpl implements UserInstanceService {
 
 	@Override
 	public List<UserInstance> createInstances(CreateUserInstanceRequestTO createUserInstanceTO, int quantity) {
+		return createInstances(getUserInstanceByRequest(createUserInstanceTO), quantity);
+	}
+
+	private UserInstance getUserInstanceByRequest(CreateUserInstanceRequestTO createUserInstanceTO) {
 		final Instance instance = instanceRepository.findOne( createUserInstanceTO.getInstanceId() );
 		final OperatingSystem operatingSystem = operatingSystemRepository.findOne( createUserInstanceTO.getOperatingSystemId() );
 		final User user = userRepository.findOne( createUserInstanceTO.getUserId() );
-		return createInstances(createUserInstanceTO.toDomain(user, instance, operatingSystem), quantity);
+		return createUserInstanceTO.toDomain(user, instance, operatingSystem);
+	}
+
+	@Override
+	public UserInstance update(Long id, UpdateUserInstanceRequestTO updateUserInstanceTO) {
+		final UserInstance savedUserInstance = userInstanceRepository.findOne(id);
+		
+		UserInstanceCopyProperties.copy(updateUserInstanceTO.toDomain(), savedUserInstance);
+
+		return userInstanceRepository.save(savedUserInstance);
 	}
 
 }
