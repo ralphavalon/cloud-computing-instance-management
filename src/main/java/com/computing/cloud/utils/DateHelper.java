@@ -3,8 +3,11 @@ package com.computing.cloud.utils;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 public class DateHelper {
 
@@ -39,5 +42,38 @@ public class DateHelper {
     public static boolean isBetween(Date mainDate, Date greaterEqualDate, Date lessEqualDate) {
         return isGreaterEqualThan(mainDate, greaterEqualDate) && isLessEqualThan(mainDate, lessEqualDate);
     }
+    
+private static String DEFAULT_FORMAT = "dd/MM/yyyy";
+	
+	public static Optional<String> format(DateTime date) {
+		try {
+			return Optional.of(date.toString(DEFAULT_FORMAT));
+		} catch( Exception e ) {
+			return Optional.empty();
+		}
+	}
+	
+	public static Optional<String> format(DateTime date, String format) {
+		try {
+			return Optional.of(date.toString(format));
+		} catch( Exception e ) {
+			return Optional.empty();
+		}
+	}
+	
+	public static Optional<DateTime> toDate(String date) {
+		try {
+			return Optional.of(DateTimeFormat.forPattern(DEFAULT_FORMAT).parseDateTime(date));
+		} catch( Exception e ) {
+			return Optional.empty();
+		}
+	}
+	public static Optional<DateTime> toDate(String date, String format) {
+		try {
+			return Optional.of(DateTimeFormat.forPattern(format).parseDateTime(date));
+		} catch( Exception e ) {
+			return Optional.empty();
+		}
+	}
 
 }

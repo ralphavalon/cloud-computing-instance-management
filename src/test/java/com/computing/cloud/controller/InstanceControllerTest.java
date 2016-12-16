@@ -18,7 +18,7 @@ public class InstanceControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetInstance() {
 			InstanceResponseTO response = given()
-				.get(getUrl()+"/instances/1")
+				.get(getUrl()+"instances/1")
 				.then()
 					.statusCode(HttpStatus.SC_OK)
 					.extract().body().as(InstanceResponseTO.class);
@@ -39,7 +39,7 @@ public class InstanceControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetInstanceList() {
 			InstanceResponseTO[] responseTOArray = given()
-				.get(getUrl()+"/instances/")
+				.get(getUrl()+"instances/")
 				.then()
 					.statusCode(HttpStatus.SC_OK)
 					.extract().body().as(InstanceResponseTO[].class);

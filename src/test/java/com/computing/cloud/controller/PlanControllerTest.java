@@ -18,7 +18,7 @@ public class PlanControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetPlan() {
 			PlanResponseTO response = given()
-				.get(getUrl()+"/plans/1")
+				.get(getUrl()+"plans/1")
 				.then()
 					.statusCode(HttpStatus.SC_OK)
 					.extract().body().as(PlanResponseTO.class);
@@ -31,7 +31,7 @@ public class PlanControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetPlanList() {
 			PlanResponseTO[] response = given()
-				.get(getUrl()+"/plans/")
+				.get(getUrl()+"plans/")
 				.then()
 					.statusCode(HttpStatus.SC_OK)
 					.extract().body().as(PlanResponseTO[].class);

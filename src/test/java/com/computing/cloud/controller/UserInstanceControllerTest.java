@@ -29,7 +29,7 @@ public class UserInstanceControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetUserInstanceListByUser() {
 			UserInstanceResponseTO[] responseTOArray = given()
-					.get(getUrl()+"/userInstances/user/2")
+					.get(getUrl()+"userInstances/user/2")
 					.then()
 						.statusCode(HttpStatus.SC_OK)
 						.extract().body().as(UserInstanceResponseTO[].class);
@@ -58,7 +58,7 @@ public class UserInstanceControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetUserInstanceById() {
 			UserInstanceResponseTO response = given()
-					.get(getUrl()+"/userInstances/5")
+					.get(getUrl()+"userInstances/5")
 					.then()
 						.statusCode(HttpStatus.SC_OK)
 						.extract().body().as(UserInstanceResponseTO.class);
@@ -78,7 +78,7 @@ public class UserInstanceControllerTest extends AbstractSystemTest {
 			UserInstanceResponseTO[] responseTOArray = given()
 				.contentType(ContentType.JSON)
 				.body(getCreateUserInstanceRequestTO())
-				.post(getUrl()+"/userInstances/")
+				.post(getUrl()+"userInstances/")
 				.then()
 					.statusCode(HttpStatus.SC_CREATED)
 					.extract().body().as(UserInstanceResponseTO[].class);
@@ -118,7 +118,7 @@ public class UserInstanceControllerTest extends AbstractSystemTest {
 			given()
 				.contentType(ContentType.JSON)
 				.body(getUpdateUserInstanceRequestTO())
-				.patch(getUrl()+"/userInstances/1")
+				.patch(getUrl()+"userInstances/1")
 				.then()
 					.statusCode(HttpStatus.SC_NO_CONTENT);
 			

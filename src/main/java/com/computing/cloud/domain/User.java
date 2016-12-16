@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor(access=AccessLevel.PACKAGE)
 @AllArgsConstructor
@@ -23,6 +24,8 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@Setter
+	private String externalId;
 	private String username;
 	private String password;
 	private String email;

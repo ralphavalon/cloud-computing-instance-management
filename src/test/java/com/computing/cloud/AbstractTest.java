@@ -57,6 +57,7 @@ public abstract class AbstractTest {
 		UserBuilder builder = User.builder();
 		builder
 			.id(1L)
+			.externalId("c86b4192-ad28-4d2d-8690-7ad109eaaaf5")
 			.username("userOne")
 			.password("passOne")
 			.email("userOne@test.com")
@@ -67,6 +68,7 @@ public abstract class AbstractTest {
 		builder = User.builder();
 		builder
 			.id(2L)
+			.externalId("2ee198fb-cef7-4523-8c47-d9c12f047a4e")
 			.username("userTwo")
 			.password("passTwo")
 			.email("userTwo@test.com")

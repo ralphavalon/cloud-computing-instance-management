@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.computing.cloud.dao.UserRepository;
-import com.computing.cloud.domain.Authentication;
 import com.computing.cloud.domain.User;
-import com.computing.cloud.exception.AuthenticationException;
 import com.computing.cloud.service.UserService;
 import com.computing.cloud.utils.UserCopyProperties;
 
@@ -21,14 +19,8 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public Authentication login(String username, String password)
-			throws AuthenticationException {
-		final User user = userRepository.findByUsernameAndPassword(username,
-				password);
-		if (user == null) {
-			throw new AuthenticationException();
-		}
-		return new Authentication("token");
+	public User findByUsernameAndPassword(String username, String password) {
+		return userRepository.findByUsernameAndPassword(username, password);
 	}
 
 	@Override
@@ -53,6 +45,11 @@ public class UserServiceImpl implements UserService {
 		UserCopyProperties.copy(user, savedUser);
 
 		return userRepository.save(savedUser);
+	}
+
+	@Override
+	public User findByExternalId(String externalId) {
+		return userRepository.findByExternalId(externalId);
 	}
 
 }

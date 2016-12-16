@@ -27,7 +27,7 @@ public class UserControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetUser() {
 			UserResponseTO response = given()
-				.get(getUrl()+"/users/1")
+				.get(getUrl()+"users/1")
 				.then()
 					.statusCode(HttpStatus.SC_OK)
 					.extract().body().as(UserResponseTO.class);
@@ -42,7 +42,7 @@ public class UserControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetUserList() {
 			UserResponseTO[] responseTOArray = given()
-				.get(getUrl()+"/users/")
+				.get(getUrl()+"users/")
 				.then()
 					.statusCode(HttpStatus.SC_OK)
 					.extract().body().as(UserResponseTO[].class);
@@ -74,7 +74,7 @@ public class UserControllerTest extends AbstractSystemTest {
 			UserResponseTO response = given()
 				.contentType(ContentType.JSON)
 				.body(getCreateUserRequestTO())
-				.post(getUrl()+"/users/")
+				.post(getUrl()+"users/")
 				.then()
 					.statusCode(HttpStatus.SC_CREATED)
 					.extract().body().as(UserResponseTO.class);
@@ -91,7 +91,7 @@ public class UserControllerTest extends AbstractSystemTest {
 			given()
 				.contentType(ContentType.JSON)
 				.body(getUpdateUserRequestTO())
-				.put(getUrl()+"/users/1")
+				.put(getUrl()+"users/1")
 				.then()
 					.statusCode(HttpStatus.SC_NO_CONTENT);
 			

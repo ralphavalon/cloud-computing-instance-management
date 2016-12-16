@@ -19,7 +19,7 @@ public class HistoryControllerTest extends AbstractSystemTest {
 		@Test
 		public void apiShouldGetHistoryListPerUser() {
 			HistoryResponseTO[] response = given()
-				.get(getUrl()+"/histories/user/2")
+				.get(getUrl()+"histories/user/2")
 				.then()
 					.statusCode(HttpStatus.SC_OK)
 					.extract().body().as(HistoryResponseTO[].class);
