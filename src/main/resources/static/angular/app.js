@@ -27,6 +27,13 @@ app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 
 		templateUrl : '/pages/user_instance_new.html',
 		controller : 'UserInstanceCtrl'
 	})
+	
+	.state('user_instance_get', {
+		url : '/user_instance/:id',
+		templateUrl : '/pages/user_instance_get.html',
+		controller : 'UserInstanceCtrl'
+	})
+	
 
 	$urlRouterProvider.otherwise('/');
 

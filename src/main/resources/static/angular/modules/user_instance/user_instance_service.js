@@ -12,6 +12,10 @@ angular.module('user_instance.service', ['ngResource']).service("UserInstanceSer
 	            'save': {
 	            	method:'POST',
 	            	isArray: true
+	            },
+	            'update': {
+	            	method: 'PATCH',
+	            	params: { id: '@id' }
 	            }
 	        });
 	
@@ -28,14 +32,19 @@ angular.module('user_instance.service', ['ngResource']).service("UserInstanceSer
 			}
 			
 			var saveUserInstance = function (userInstance) {
-				UserInstanceResource.save(userInstance);
+				return UserInstanceResource.save(userInstance);
+			}
+			
+			var updateUserInstance = function (userInstanceId, status) {
+				return UserInstanceResource.update({ id: userInstanceId } , { status: status });
 			}
 			
 			 return {
 				 getUserInstances: getUserInstances,
 				 getUserInstance: getUserInstance,
 				 getUserInstanceByUser: getUserInstanceByUser,
-				 saveUserInstance: saveUserInstance
+				 saveUserInstance: saveUserInstance,
+				 updateUserInstance: updateUserInstance 
 		        }
 			
 		});

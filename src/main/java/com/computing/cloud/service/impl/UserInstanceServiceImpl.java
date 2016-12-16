@@ -24,7 +24,6 @@ import com.computing.cloud.enums.Operation;
 import com.computing.cloud.service.UserInstanceService;
 import com.computing.cloud.to.request.CreateUserInstanceRequestTO;
 import com.computing.cloud.to.request.UpdateUserInstanceRequestTO;
-import com.computing.cloud.utils.UserInstanceCopyProperties;
 
 @Service
 @Transactional
@@ -104,7 +103,7 @@ public class UserInstanceServiceImpl implements UserInstanceService {
 	public UserInstance update(Long id, UpdateUserInstanceRequestTO updateUserInstanceTO) {
 		final UserInstance savedUserInstance = userInstanceRepository.findOne(id);
 		
-		UserInstanceCopyProperties.copy(updateUserInstanceTO.toDomain(), savedUserInstance);
+		savedUserInstance.setStatus(updateUserInstanceTO.getStatus());
 
 		return userInstanceRepository.save(savedUserInstance);
 	}

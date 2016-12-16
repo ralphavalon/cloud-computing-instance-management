@@ -39,6 +39,7 @@ public class UserInstance {
 	private String instanceUniqueName;
 	
 	@Enumerated(EnumType.STRING)
+	@Setter
 	private InstanceStatus status;
 	
 	public UserInstance(User user, InstanceStatus status, Instance instance, OperatingSystem operatingSystem) {
