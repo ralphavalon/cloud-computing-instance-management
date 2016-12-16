@@ -1,5 +1,7 @@
 package com.computing.cloud.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,11 @@ public class OperatingSystemServiceImpl implements OperatingSystemService {
 	@Override
 	public OperatingSystem findById(Long id) {
 		return operatingSystemRepository.findOne(id);
+	}
+
+	@Override
+	public List<OperatingSystem> findAll() {
+		return (List<OperatingSystem>) operatingSystemRepository.findAll();
 	}
 
 }

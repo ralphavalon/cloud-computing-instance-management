@@ -1,6 +1,6 @@
-angular.module('user_instance', ['instance.service']).controller("UserInstanceCtrl",
+angular.module('user_instance', ['instance.service', 'operating_system.service']).controller("UserInstanceCtrl",
 		
-		function($scope, $state, $filter, InstanceService) {
+		function($scope, $state, $filter, InstanceService, OperatingSystemService) {
 	
 			$scope.userInstance = {
 				"status": "OFF"
@@ -8,13 +8,7 @@ angular.module('user_instance', ['instance.service']).controller("UserInstanceCt
 
 			$scope.instances = InstanceService.getInstances();
 			
-			$scope.operatingSystems = [ {
-				"id" : 1,
-				"name": "Windows Server 2003"
-			}, {
-				"id" : 2,
-				"name": "Ubuntu 12.04"
-			} ];
+			$scope.operatingSystems = OperatingSystemService.getOperatingSystems();
 			
 			$scope.create = function () {
 				if($scope.userInstance.status === true) {

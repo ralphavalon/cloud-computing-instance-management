@@ -20,8 +20,6 @@ angular.module('dashboard', []).controller("DashboardCtrl",
 
 			$scope.statusIs = function(status) {
 				return function(instance) {
-					console.log('ITEM: ' + status);
-					console.log('instance: ' + instance);
 					return instance.status === status;
 				};
 			};
