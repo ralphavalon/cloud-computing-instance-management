@@ -22,7 +22,7 @@ public class AuthenticationController {
 	private UserService service;
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
-	public ResponseEntity<AuthenticationResponseTO> authentication(@RequestBody AuthenticationRequestTO request) {
+	public ResponseEntity<AuthenticationResponseTO> login(@RequestBody AuthenticationRequestTO request) {
 		User user = service.findByUsernameAndPassword(request.getUsername(), request.getPassword());
 		
 		String token = Encrypter.encryptToken( user.getExternalId() );

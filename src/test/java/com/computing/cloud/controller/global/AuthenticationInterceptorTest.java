@@ -5,8 +5,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.junit.After;
@@ -19,7 +17,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerMapping;
 
 import com.computing.cloud.AbstractTest;
 import com.computing.cloud.authentication.Authenticate;
@@ -111,9 +108,7 @@ public class AuthenticationInterceptorTest extends AbstractTest {
 	private MockHttpServletRequest mockHttpServletRequest(String externalId, String token) {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		
-		Map<String, String> pathvars = new HashMap<String, String>();
-	    pathvars.put("externalId", externalId);
-		request.setAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, pathvars);
+	    request.addHeader("usercode", externalId);
 	    
 		if( token != null ) {
 			request.addHeader("token", token);
