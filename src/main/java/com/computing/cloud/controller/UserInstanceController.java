@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.computing.cloud.authentication.Authenticate;
 import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.service.InstanceService;
 import com.computing.cloud.service.OperatingSystemService;
@@ -33,18 +34,21 @@ public class UserInstanceController {
 	@Autowired
 	private OperatingSystemService operatingSystemService;
 	
+	@Authenticate
 	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
 	public ResponseEntity<List<UserInstanceResponseTO>> findAll(@PathVariable("id") String id) {
 		List<UserInstanceResponseTO> userInstances = UserInstanceResponseTO.toTOList(userInstanceService.getInstancesByUser( Long.valueOf(id)) );
 		return new ResponseEntity<List<UserInstanceResponseTO>>(userInstances, HttpStatus.OK);
 	}
 	
+	@Authenticate
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<UserInstanceResponseTO> findByExternalId(@PathVariable("id") String id) {
 		UserInstanceResponseTO userInstance = new UserInstanceResponseTO( userInstanceService.findById(Long.valueOf(id)) );
 		return new ResponseEntity<UserInstanceResponseTO>(userInstance, HttpStatus.OK);
 	}
 	
+	@Authenticate
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ResponseEntity<List<UserInstanceResponseTO>> create(@RequestBody CreateUserInstanceRequestTO userInstanceRequestTO) {
 		final List<UserInstance> createdUserInstances = userInstanceService.createInstances( userInstanceRequestTO, userInstanceRequestTO.getQuantity() );
@@ -52,6 +56,7 @@ public class UserInstanceController {
 		return new ResponseEntity<List<UserInstanceResponseTO>>(userInstances, HttpStatus.CREATED);
 	}
 	
+	@Authenticate
 	@RequestMapping(value="/{id}", method=RequestMethod.PATCH)
 	public ResponseEntity<UserInstanceResponseTO> update(@PathVariable("id") String id, @RequestBody UpdateUserInstanceRequestTO userInstanceRequestTO) {
 		UserInstanceResponseTO userInstance = new UserInstanceResponseTO( userInstanceService.update( Long.valueOf(id), userInstanceRequestTO ) );
