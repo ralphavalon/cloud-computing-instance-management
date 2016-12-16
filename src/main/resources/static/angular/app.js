@@ -1,6 +1,6 @@
 var app = app || {};
 
-app = angular.module('cloudComputing', [ 'login', 'dashboard', 'datatables', 'ui.router', 'jcs-autoValidate' ])
+app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance','datatables', 'ui.router', 'jcs-autoValidate' ])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -17,6 +17,12 @@ app = angular.module('cloudComputing', [ 'login', 'dashboard', 'datatables', 'ui
 		url : '/dashboard',
 		templateUrl : '/pages/index.html',
 		controller : 'DashboardCtrl'
+	})
+	
+	.state('user_instance_new', {
+		url : '/user_instance_new',
+		templateUrl : '/pages/user_instance_new.html',
+		controller : 'UserInstanceCtrl'
 	})
 
 	$urlRouterProvider.otherwise('/');

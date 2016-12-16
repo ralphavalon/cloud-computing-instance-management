@@ -1,21 +1,26 @@
 package com.computing.cloud.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.computing.cloud.dao.HistoryRepository;
 import com.computing.cloud.dao.InstanceRepository;
 import com.computing.cloud.dao.OperatingSystemRepository;
 import com.computing.cloud.dao.UserInstanceRepository;
 import com.computing.cloud.dao.UserRepository;
+import com.computing.cloud.domain.History;
+import com.computing.cloud.domain.History.HistoryBuilder;
 import com.computing.cloud.domain.Instance;
 import com.computing.cloud.domain.OperatingSystem;
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.UserInstance;
 import com.computing.cloud.enums.InstanceStatus;
+import com.computing.cloud.enums.Operation;
 import com.computing.cloud.service.UserInstanceService;
 import com.computing.cloud.to.request.CreateUserInstanceRequestTO;
 import com.computing.cloud.to.request.UpdateUserInstanceRequestTO;
@@ -36,6 +41,9 @@ public class UserInstanceServiceImpl implements UserInstanceService {
 	
 	@Autowired
 	private OperatingSystemRepository operatingSystemRepository;
+	
+	@Autowired
+	private HistoryRepository historyRepository;
 
 	@Override
 	public List<UserInstance> createInstances(UserInstance userInstance, int quantity) {
@@ -49,6 +57,17 @@ public class UserInstanceServiceImpl implements UserInstanceService {
 			UserInstance newUserInstance = new UserInstance(user, status, instance, operatingSystem);
 			userInstanceRepository.save(newUserInstance);
 			instances.add(newUserInstance);
+			
+			if(InstanceStatus.ON.equals(newUserInstance.getStatus())) {
+				HistoryBuilder builder = History.builder();
+					History history = builder
+						.operation(Operation.TURN_ON)
+						.user(newUserInstance.getUser())
+						.userInstance(newUserInstance)
+						.lastUpdated(Calendar.getInstance())
+						.build();
+					historyRepository.save(history);
+			}
 		}
 		return instances;
 	}
