@@ -1,5 +1,5 @@
 server:
-  context-path: /herotrip
+  context-path: /
   port: 8080
 
 ---
@@ -20,6 +20,15 @@ spring:
     hibernate: 
       ddl-auto: create
     show-sql: true
+    
+jsondoc:
+  version: 1.0
+  basePath: http://localhost:8080/
+  packages: 
+    - com.computing.cloud.controller
+    - com.computing.cloud.domain
+    - com.computing.cloud.to.request
+    - com.computing.cloud.to.response
 
 ---
  
