@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.computing.cloud.authentication.Authenticate;
 import com.computing.cloud.domain.UserInstance;
-import com.computing.cloud.service.InstanceService;
-import com.computing.cloud.service.OperatingSystemService;
 import com.computing.cloud.service.UserInstanceService;
-import com.computing.cloud.service.UserService;
 import com.computing.cloud.to.request.CreateUserInstanceRequestTO;
 import com.computing.cloud.to.request.UpdateUserInstanceRequestTO;
 import com.computing.cloud.to.response.UserInstanceResponseTO;
@@ -27,12 +24,6 @@ public class UserInstanceController {
 	
 	@Autowired
 	private UserInstanceService userInstanceService;
-	@Autowired
-	private InstanceService instanceService;
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private OperatingSystemService operatingSystemService;
 	
 	@Authenticate
 	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)

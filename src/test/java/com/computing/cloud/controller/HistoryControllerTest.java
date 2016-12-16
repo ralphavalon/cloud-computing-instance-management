@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.apache.http.HttpStatus;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,15 +18,19 @@ import com.jayway.restassured.response.Header;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class HistoryControllerTest extends AbstractSystemTest {
+	
+	@Before
+	public void init() {
+		String externalId = "c86b4192-ad28-4d2d-8690-7ad109eaaaf5";
+		token = new Header("token", Encrypter.encryptToken(externalId));
+		usercode = new Header("usercode", externalId);
+	}
 
 	@Test
 	public void apiShouldGetHistoryListPerUser() {
-		String externalId = "c86b4192-ad28-4d2d-8690-7ad109eaaaf5";
-		Header token = new Header("token", Encrypter.encryptToken(externalId));
-		Header userId = new Header("usercode", externalId);
 		HistoryResponseTO[] response = given()
 				.header(token)
-				.header(userId)
+				.header(usercode)
 				.get(getUrl() + "histories/user/2").then()
 				.statusCode(HttpStatus.SC_OK).extract().body()
 				.as(HistoryResponseTO[].class);
