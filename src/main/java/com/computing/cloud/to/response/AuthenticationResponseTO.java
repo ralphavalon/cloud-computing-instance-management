@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponseTO {
 
 	private String token;
+	private String externalId;
 	
-	public AuthenticationResponseTO(String token) {
+	public AuthenticationResponseTO(String token, String externalId) {
 		this.token = token;
+		this.externalId = externalId;
 	}
 	
 }

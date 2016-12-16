@@ -18,7 +18,7 @@ app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 
 	
 	.state('dashboard', {
 		url : '/dashboard',
-		templateUrl : '/pages/index.html',
+		templateUrl : '/pages/dashboard.html',
 		controller : 'DashboardCtrl'
 	})
 	
@@ -32,6 +32,12 @@ app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 
 		url : '/user_instance/:id',
 		templateUrl : '/pages/user_instance_get.html',
 		controller : 'UserInstanceCtrl'
+	})
+	
+	.state('logout', {
+		url : '/logout',
+		templateUrl : '/pages/login.html',
+		controller : 'LoginCtrl'
 	})
 	
 

@@ -26,7 +26,12 @@ public class AuthenticationController {
 		User user = service.findByUsernameAndPassword(request.getUsername(), request.getPassword());
 		
 		String token = Encrypter.encryptToken( user.getExternalId() );
-		return new ResponseEntity<AuthenticationResponseTO>(new AuthenticationResponseTO(token), HttpStatus.OK);
+		return new ResponseEntity<AuthenticationResponseTO>(new AuthenticationResponseTO(token, user.getExternalId()), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public ResponseEntity<AuthenticationResponseTO> logout() {
+		return new ResponseEntity<AuthenticationResponseTO>(HttpStatus.NO_CONTENT);
 	}
 
 }
