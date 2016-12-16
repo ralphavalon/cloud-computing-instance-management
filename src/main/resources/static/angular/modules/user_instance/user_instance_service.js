@@ -8,7 +8,11 @@ angular.module('user_instance.service', ['ngResource']).service("UserInstanceSer
 	            	params: { id: '@id' }, 
 	            	url: 'http://localhost:8080/userInstances/user/:id', 
 	            	isArray: true
-	            	}
+	            	},
+	            'save': {
+	            	method:'POST',
+	            	isArray: true
+	            }
 	        });
 	
 			var getUserInstances = function () {
@@ -23,10 +27,15 @@ angular.module('user_instance.service', ['ngResource']).service("UserInstanceSer
 				return UserInstanceResource.getByUser({ id: userId});
 			}
 			
+			var saveUserInstance = function (userInstance) {
+				UserInstanceResource.save(userInstance);
+			}
+			
 			 return {
 				 getUserInstances: getUserInstances,
 				 getUserInstance: getUserInstance,
-				 getUserInstanceByUser: getUserInstanceByUser
+				 getUserInstanceByUser: getUserInstanceByUser,
+				 saveUserInstance: saveUserInstance
 		        }
 			
 		});
