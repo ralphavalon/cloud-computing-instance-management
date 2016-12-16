@@ -26,10 +26,14 @@ public class User {
 	private Long id;
 	@Setter
 	private String externalId;
+	@Setter
 	private String username;
 	private String password;
+	@Setter
 	private String email;
+	@Setter
 	private String creditCard;
+	@Setter
 	private Boolean status;
 	
 }

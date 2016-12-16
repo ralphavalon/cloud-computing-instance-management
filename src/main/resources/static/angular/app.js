@@ -1,6 +1,6 @@
 var app = app || {};
 
-app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 'instance.service', 'ngResource', 'datatables', 'ui.router', 'jcs-autoValidate' ])
+app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 'user', 'instance.service', 'ngResource', 'datatables', 'ui.router', 'jcs-autoValidate' ])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider) {
 
@@ -32,6 +32,12 @@ app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 
 		url : '/user_instance/:id',
 		templateUrl : '/pages/user_instance_get.html',
 		controller : 'UserInstanceCtrl'
+	})
+	
+	.state('user_profile', {
+		url : '/user_profile',
+		templateUrl : '/pages/user_profile.html',
+		controller : 'UserCtrl'
 	})
 	
 	.state('logout', {

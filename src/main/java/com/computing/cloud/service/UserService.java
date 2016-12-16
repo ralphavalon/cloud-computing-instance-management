@@ -6,7 +6,7 @@ import com.computing.cloud.domain.User;
 
 public interface UserService {
 	
-	User findByUsernameAndPassword(String username, String password);
+	User findByUsernameAndPasswordAndStatus(String username, String password, Boolean status);
 	
 	User create(User user);
 	

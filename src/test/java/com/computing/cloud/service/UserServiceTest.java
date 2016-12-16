@@ -36,25 +36,25 @@ public class UserServiceTest extends AbstractTest {
 	
 	@Test
 	public void shouldReturnTokenWhenUsernameAndPasswordAreRight() {
-		final User user = service.findByUsernameAndPassword("userOne", "passOne");
+		final User user = service.findByUsernameAndPasswordAndStatus("userOne", "passOne", Boolean.TRUE);
 		assertNotNull(user);
 	}
 	
 	@Test
 	public void shouldThrowExceptionWhenUsernameIsNotRight() {
-		final User user = service.findByUsernameAndPassword("wrong_username", "passOne");
+		final User user = service.findByUsernameAndPasswordAndStatus("wrong_username", "passOne", Boolean.TRUE);
 		assertNull(user);
 	}
 	
 	@Test
 	public void shouldThrowExceptionWhenPasswordIsNotRight() {
-		final User user = service.findByUsernameAndPassword("userOne", "wrong_password");
+		final User user = service.findByUsernameAndPasswordAndStatus("userOne", "wrong_password", Boolean.TRUE);
 		assertNull(user);
 	}
 	
 	@Test
 	public void shouldThrowExceptionWhenUsernameAndPasswordAreNotRight() {
-		final User user = service.findByUsernameAndPassword("wrong_username", "wrong_password");
+		final User user = service.findByUsernameAndPasswordAndStatus("wrong_username", "wrong_password", Boolean.TRUE);
 		assertNull(user);
 	}
 

@@ -23,7 +23,7 @@ public class AuthenticationController {
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ResponseEntity<AuthenticationResponseTO> login(@RequestBody AuthenticationRequestTO request) {
-		User user = service.findByUsernameAndPassword(request.getUsername(), request.getPassword());
+		User user = service.findByUsernameAndPasswordAndStatus(request.getUsername(), request.getPassword(), Boolean.TRUE);
 		
 		String token = Encrypter.encryptToken( user.getExternalId() );
 		return new ResponseEntity<AuthenticationResponseTO>(new AuthenticationResponseTO(token, user.getExternalId()), HttpStatus.OK);
