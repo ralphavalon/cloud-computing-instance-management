@@ -1,6 +1,6 @@
 var app = app || {};
 
-app = angular.module('cloudComputing', [ 'login', 'ui.router' ])
+app = angular.module('cloudComputing', [ 'login', 'ui.router', 'jcs-autoValidate' ])
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
