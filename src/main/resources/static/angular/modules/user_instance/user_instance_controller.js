@@ -1,30 +1,12 @@
-angular.module('user_instance', []).controller("UserInstanceCtrl",
+angular.module('user_instance', ['instance.service']).controller("UserInstanceCtrl",
 		
-		function($scope, $state, $filter) {
+		function($scope, $state, $filter, InstanceService) {
 	
 			$scope.userInstance = {
 				"status": "OFF"
 			};
 
-			$scope.instances = [ {
-				"id" : 1,
-				"name": "small",
-				"planId" : 1,
-				"planName" : "Basic",
-				"cpu" : 1,
-				"memory" : 2,
-				"storage" : 40,
-				"storageType" : "HD"
-			}, {
-				"id" : 2,
-				"name": "medium",
-				"planId" : 1,
-				"planName" : "Basic",
-				"cpu" : 1,
-				"memory" : 4,
-				"storage" : 250,
-				"storageType" : "HD"
-			} ];
+			$scope.instances = InstanceService.getInstances();
 			
 			$scope.operatingSystems = [ {
 				"id" : 1,

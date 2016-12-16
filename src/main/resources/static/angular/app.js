@@ -1,9 +1,10 @@
 var app = app || {};
 
-app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance','datatables', 'ui.router', 'jcs-autoValidate' ])
+app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 'instance.service', 'ngResource', 'datatables', 'ui.router', 'jcs-autoValidate' ])
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider) {
 
+	$resourceProvider.defaults.stripTrailingSlashes = false;
 	$httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
 	$httpProvider.defaults.headers.common['Accept'] = 'application/json';
 
