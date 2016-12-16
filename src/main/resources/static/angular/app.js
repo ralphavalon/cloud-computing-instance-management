@@ -12,6 +12,12 @@ app = angular.module('cloudComputing', [ 'login', 'ui.router', 'jcs-autoValidate
 		templateUrl : '/pages/login.html',
 		controller : 'LoginCtrl'
 	})
+	
+	.state('dashboard', {
+		url : '/dashboard',
+		templateUrl : '/pages/index.html',
+		controller : 'LoginCtrl'
+	})
 
 	$urlRouterProvider.otherwise('/');
 
