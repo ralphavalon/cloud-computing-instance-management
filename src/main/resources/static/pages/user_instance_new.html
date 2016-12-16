@@ -58,6 +58,7 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<form ng-submit="create()" novalidate="novalidate">
+									<input type="hidden" ng-model="userInstance.userId" value="1" />
 									<div class="form-group">
 										<label>How many</label> <input ng-model="userInstance.quantity"
 											class="form-control" type="number" min="1" placeholder="Quantity"
@@ -81,8 +82,7 @@
                                             </label>
                                         </div>
                                     </div>
-									<button type="submit" class="btn btn-default">Submit
-										Button</button>
+									<button type="submit" class="btn btn-default">Create</button>
 								</form>
 							</div>
 						</div>
