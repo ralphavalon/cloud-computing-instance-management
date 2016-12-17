@@ -3,6 +3,8 @@ package com.computing.cloud.to.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 import com.computing.cloud.domain.User;
 import com.computing.cloud.domain.User.UserBuilder;
 
@@ -18,6 +20,7 @@ public class CreateUserRequestTO extends UserRequestTO {
 				.email(getEmail())
 				.username(getUsername())
 				.password(getPassword())
+				.externalId(UUID.randomUUID().toString())
 				.status(Boolean.TRUE);
 		return builder.build();
 	}

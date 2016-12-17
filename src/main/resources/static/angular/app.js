@@ -7,8 +7,8 @@ app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 
 	$resourceProvider.defaults.stripTrailingSlashes = false;
 	$httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
 	$httpProvider.defaults.headers.common['Accept'] = 'application/json';
-	$httpProvider.defaults.headers.common['token'] = 'nyFxZblv-2aX-JiDFGyskDdWJolcgJUez6an7B2BSQitQOzwCPm4gMlnO0Hkjho1';
-	$httpProvider.defaults.headers.common['usercode'] = 'c86b4192-ad28-4d2d-8690-7ad109eaaaf5';
+//	$httpProvider.defaults.headers.common['token'] = 'nyFxZblv-2aX-JiDFGyskDdWJolcgJUez6an7B2BSQitQOzwCPm4gMlnO0Hkjho1';
+//	$httpProvider.defaults.headers.common['usercode'] = 'c86b4192-ad28-4d2d-8690-7ad109eaaaf5';
 
 	$stateProvider.state('login', {
 		url : '/',

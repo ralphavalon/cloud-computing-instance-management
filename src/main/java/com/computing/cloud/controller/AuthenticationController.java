@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.computing.cloud.authentication.Encrypter;
 import com.computing.cloud.domain.User;
+import com.computing.cloud.exception.NotFoundException;
 import com.computing.cloud.service.UserService;
 import com.computing.cloud.to.request.AuthenticationRequestTO;
 import com.computing.cloud.to.response.AuthenticationResponseTO;
@@ -24,9 +25,11 @@ public class AuthenticationController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ResponseEntity<AuthenticationResponseTO> login(@RequestBody AuthenticationRequestTO request) {
 		User user = service.findByUsernameAndPasswordAndStatus(request.getUsername(), request.getPassword(), Boolean.TRUE);
-		
+		if(user == null) {
+			throw new NotFoundException(User.class);
+		}
 		String token = Encrypter.encryptToken( user.getExternalId() );
-		return new ResponseEntity<AuthenticationResponseTO>(new AuthenticationResponseTO(token, user.getExternalId()), HttpStatus.OK);
+		return new ResponseEntity<AuthenticationResponseTO>(new AuthenticationResponseTO(token, user.getExternalId(), user.getId()), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)

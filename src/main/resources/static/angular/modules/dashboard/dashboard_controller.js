@@ -1,8 +1,8 @@
 angular.module('dashboard', ['user_instance.service']).controller("DashboardCtrl",
 		
-		function($scope, $state, $filter, UserInstanceService) {
+		function($scope, $state, $filter, UserInstanceService, $rootScope) {
 
-			$scope.userInstances = UserInstanceService.getUserInstanceByUser(1);
+			$scope.userInstances = UserInstanceService.getUserInstanceByUser($rootScope.userId);
 			
 			$scope.statusIs = function(status) {
 				return function(instance) {

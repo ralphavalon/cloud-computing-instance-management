@@ -1,11 +1,11 @@
 angular.module('user_instance', ['instance.service', 'operating_system.service', 'user_instance.service']).controller("UserInstanceCtrl",
 		
-		function($scope, $state, $filter, InstanceService, OperatingSystemService, UserInstanceService) {
+		function($scope, $state, $filter, $rootScope, InstanceService, OperatingSystemService, UserInstanceService) {
 		
 			var newUserInstance = function () {
 				$scope.userInstance = {
 					"status": "OFF",
-					"userId": 1
+					"userId": $rootScope.userId
 				};
 		
 				$scope.instances = InstanceService.getInstances();

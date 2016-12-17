@@ -24,7 +24,6 @@ public class UserController {
 	@Autowired
 	private UserService service;
 
-	@Authenticate
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ResponseEntity<List<UserResponseTO>> findAll() {
 		List<UserResponseTO> users = UserResponseTO.toTOList(service.findAll());
