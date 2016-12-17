@@ -104,6 +104,15 @@ public class UserInstanceServiceImpl implements UserInstanceService {
 		final UserInstance savedUserInstance = userInstanceRepository.findOne(id);
 		
 		savedUserInstance.setStatus(updateUserInstanceTO.getStatus());
+		HistoryBuilder builder = History.builder();
+		Operation operation = InstanceStatus.ON.equals(savedUserInstance.getStatus()) ? Operation.TURN_ON : Operation.TURN_OFF;
+		History history = builder
+			.operation(operation)
+			.user(savedUserInstance.getUser())
+			.userInstance(savedUserInstance)
+			.lastUpdated(Calendar.getInstance())
+			.build();
+		historyRepository.save(history);
 
 		return userInstanceRepository.save(savedUserInstance);
 	}
