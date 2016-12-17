@@ -1,29 +1,24 @@
 angular.module('user', ['user.service']).controller("UserCtrl",
 		
-		function($scope, $state, UserService) {
+		function($scope, $state, $rootScope, UserService) {
 			
 			var creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
 			
-			$scope.validateCreditCard = function (creditCard) {
+			$scope.isValidCreditCard = function (creditCard) {
 				return creditCardRegex.test($scope.user.creditCard);
 			};
 		
 			var newUser = function () {
-				$scope.user = {
-					"status": "OFF",
-					"userId": 1
-				};
+				$scope.user = {};
 		
-				$scope.create = function () {
-					if($scope.user.status === true) {
-						$scope.user.status = 'ON';
-					}
+				$scope.createUser = function () {
 					UserService.saveUser($scope.user);
-					$state.go('dashboard');
+					alert("User created");
+					$state.go('login');
 				};
 			}
 	
-			$scope.userId = 1;
+			$scope.userId = $rootScope.userId;
 			
 			if( $scope.userId != null && typeof $scope.userId !== 'undefined') {
 				$scope.user = UserService.getUser($scope.userId);
@@ -34,7 +29,10 @@ angular.module('user', ['user.service']).controller("UserCtrl",
 					if($scope.status_active == null || typeof $scope.status_active === 'undefined') {
 						$scope.status_active = false;
 					}
-					console.log($scope.status_active);
+					if(! $scope.isValidCreditCard($scope.user.creditCard)) {
+						alert('Invalid credit card');
+						$state.go('dashboard');
+					}
 					$scope.userToUpdate = {
 								username: $scope.user.username, 
 								email: $scope.user.email, 

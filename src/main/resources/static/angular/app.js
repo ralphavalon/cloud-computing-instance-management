@@ -40,6 +40,12 @@ app = angular.module('cloudComputing', [ 'login', 'dashboard', 'user_instance', 
 		controller : 'UserCtrl'
 	})
 	
+	.state('sign_up', {
+		url : '/sign_up',
+		templateUrl : '/pages/user_new.html',
+		controller : 'UserCtrl'
+	})
+	
 	.state('logout', {
 		url : '/logout',
 		templateUrl : '/pages/login.html',
